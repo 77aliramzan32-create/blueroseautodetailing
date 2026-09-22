@@ -75,7 +75,7 @@ export function organizationSchema() {
     url: BASE_URL,
     logo: {
       '@type': 'ImageObject',
-      url: `${BASE_URL}/images/blue-rose-auto-detailing-logo.png`,
+      url: `${BASE_URL}/images/Blue-Rose-Auto.webp`,
     },
     contactPoint: {
       '@type': 'ContactPoint',

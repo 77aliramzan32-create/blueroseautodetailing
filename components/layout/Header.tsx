@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const services = [
   { name: "Auto Detailing",        href: "/services/auto-detailing" },
@@ -78,27 +79,15 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between gap-4">
 
           {/* ── Logo ── */}
-          <Link href="/" onClick={closeMobile} className="flex-shrink-0 group">
-            <div className="flex flex-col leading-none">
-              <span
-                className="font-display font-bold text-[1.6rem] md:text-[1.75rem] tracking-tight text-ink group-hover:text-white transition-colors"
-                style={{ fontFamily: "var(--font-display, sans-serif)" }}
-              >
-                BLUE ROSE
-              </span>
-              {/* accent rule */}
-              <span
-                className="block h-[2px] w-full rounded-full mt-[2px] mb-[3px]"
-                style={{ background: "linear-gradient(90deg, #C8243F 0%, #A81D34 60%, transparent 100%)" }}
-                aria-hidden="true"
-              />
-              <span
-                className="text-[0.48rem] md:text-[0.52rem] tracking-[0.22em] uppercase text-chrome font-medium"
-                style={{ fontFamily: "var(--font-body, sans-serif)", letterSpacing: "0.22em" }}
-              >
-                AUTO DETAILING SERVICES
-              </span>
-            </div>
+          <Link href="/" onClick={closeMobile} className="flex-shrink-0 group" aria-label="Blue Rose Auto Detailing — Home">
+            <Image
+              src="/images/Blue-Rose-Auto.webp"
+              alt="Blue Rose Auto Detailing logo"
+              width={600}
+              height={700}
+              priority
+              className="h-12 md:h-14 w-auto transition-opacity duration-200 group-hover:opacity-90"
+            />
           </Link>
 
           {/* ── Desktop nav ── */}

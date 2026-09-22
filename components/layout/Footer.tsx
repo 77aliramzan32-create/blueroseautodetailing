@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const services = [
   { name: "Auto Detailing",        href: "/services/auto-detailing" },
@@ -72,24 +73,14 @@ export default function Footer() {
 
           {/* ── Col 1: Brand ── */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="inline-flex flex-col leading-none mb-5 group">
-              <span
-                className="font-display font-bold text-[1.55rem] tracking-tight text-ink group-hover:text-white transition-colors"
-                style={{ fontFamily: "var(--font-display, sans-serif)" }}
-              >
-                BLUE ROSE
-              </span>
-              <span
-                className="block h-[2px] w-full rounded-full mt-[2px] mb-[3px]"
-                style={{ background: "linear-gradient(90deg, #C8243F 0%, #A81D34 60%, transparent 100%)" }}
-                aria-hidden="true"
+            <Link href="/" className="inline-block mb-5 group" aria-label="Blue Rose Auto Detailing — Home">
+              <Image
+                src="/images/Blue-Rose-Auto.webp"
+                alt="Blue Rose Auto Detailing logo"
+                width={600}
+                height={700}
+                className="h-20 w-auto transition-opacity duration-200 group-hover:opacity-90"
               />
-              <span
-                className="text-[0.48rem] tracking-[0.22em] uppercase text-chrome font-medium"
-                style={{ fontFamily: "var(--font-body, sans-serif)" }}
-              >
-                AUTO DETAILING SERVICES
-              </span>
             </Link>
 
             <p className="text-sm text-ink-subtle leading-relaxed mb-6">
