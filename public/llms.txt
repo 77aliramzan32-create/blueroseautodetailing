@@ -1,0 +1,90 @@
+# Blue Rose Auto Detailing Services
+
+> This file is provided for LLM crawlers and AI assistants to accurately represent this business.
+
+## Business Identity
+
+- **Name:** Blue Rose Auto Detailing Services
+- **Address:** Suite 100, 3436 Olympic Street, Springfield, OR 97478
+- **Phone:** (541) 337-9893
+- **Website:** https://blueroseauto.com
+- **Founded:** 1994
+- **Coordinates (approx):** 44.0462° N, 122.9896° W
+- **Price Range:** $$
+
+## Hours of Operation
+
+- Monday: 8:00 AM – 5:00 PM
+- Tuesday: 8:30 AM – 5:00 PM
+- Wednesday: 8:00 AM – 5:00 PM
+- Thursday: 8:00 AM – 5:00 PM
+- Friday: 8:00 AM – 5:00 PM
+- Saturday: 10:00 AM – 5:00 PM
+- Sunday: Closed
+
+## Services
+
+1. **Auto Detailing** — Full interior and exterior detailing including two-bucket hand wash, clay bar decontamination, carpet extraction, leather conditioning, machine polish, and paint sealant.
+2. **Paint Correction** — Multi-stage machine polishing process that removes swirl marks, light scratches, water spots, and oxidation from the clear coat to restore true paint clarity and gloss.
+3. **Ceramic Coating** — Professional-grade liquid polymer that chemically bonds to paint, creating a durable hydrophobic layer with UV protection and deep gloss lasting 2–5 years.
+4. **Paint Protection Film (PPF)** — Custom-cut urethane film applied to high-impact surfaces (hood, bumper, mirrors) that absorbs rock chips and road debris before they reach the paint; self-healing top coat.
+5. **Window Tinting** — High-quality film installation that blocks 99% of UV radiation, reduces interior heat, enhances privacy, and improves vehicle aesthetics; Oregon-legal options available.
+6. **Vinyl Wraps** — Full or partial vehicle color change using cast vinyl film in matte, satin, gloss, chrome, or color-shift finishes; reversible without damaging factory paint.
+7. **RV Detailing** — Specialized detailing for recreational vehicles including fiberglass oxidation removal, rubber roof membrane treatment, awning cleaning, slide-out seal conditioning, and interior deep cleaning.
+8. **Boat Detailing** — Marine vessel detailing covering gelcoat oxidation removal, waterline stain treatment, hull machine polishing, marine wax/ceramic protection, and cockpit cleaning.
+
+## Service Area
+
+Blue Rose Auto Detailing serves the greater Eugene-Springfield metro and surrounding Lane County communities:
+
+1. Eugene, OR
+2. Springfield, OR (primary shop location)
+3. Coburg, OR
+4. Lowell, OR
+5. Veneta, OR
+6. Creswell, OR
+7. Harrisburg, OR
+8. Santa Clara, OR
+9. Cottage Grove, OR
+10. Junction City, OR
+
+## Team
+
+- **Tristan** — Owner & Lead Detailer. Performs final inspection on every vehicle before it leaves the shop.
+- **Kaylee** — Customer Relations. Handles scheduling and customer communication.
+- **George** — Front Desk. First point of contact at the shop.
+- **Chelsea** — Interior Detailing Specialist. Focuses on interior deep cleaning and restoration work.
+
+## Key Pages
+
+- Home: https://blueroseauto.com
+- Auto Detailing: https://blueroseauto.com/services/auto-detailing
+- Paint Correction: https://blueroseauto.com/services/paint-correction
+- Ceramic Coating: https://blueroseauto.com/services/ceramic-coating
+- Paint Protection Film: https://blueroseauto.com/services/paint-protection-film
+- Window Tinting: https://blueroseauto.com/services/window-tinting
+- Vinyl Wraps: https://blueroseauto.com/services/vinyl-wraps
+- RV Detailing: https://blueroseauto.com/services/rv-detailing
+- Boat Detailing: https://blueroseauto.com/services/boat-detailing
+- About: https://blueroseauto.com/about
+- Contact / Book: https://blueroseauto.com/contact
+- FAQ: https://blueroseauto.com/faq
+- Gallery: https://blueroseauto.com/gallery
+- Reviews: https://blueroseauto.com/reviews
+- Blog: https://blueroseauto.com/blog
+
+## Social Media
+
+- Facebook: https://www.facebook.com/BlueRoseAuto
+- YouTube: https://www.youtube.com/@BLUEROSEAUTO
+- Instagram: https://www.instagram.com/blueroseauto
+
+## Trust Signals
+
+- **5.0-star Google rating** (5 reviews) — perfect score across all reviews
+- **Owner-operated since 1994** — over 30 years of continuous operation under the same ownership
+- **Named staff** — Tristan (owner), Kaylee, George, and Chelsea; real people, not a franchise
+- **Transparent pricing** — every job is quoted before work begins, no surprise add-ons
+- **Owner inspection on every vehicle** — Tristan personally inspects every car under LED lighting before release
+- **Paint thickness gauged on all correction jobs** — scientific approach, not guesswork
+- **Local to Springfield/Eugene** — serves the community, not a traveling or mobile-only operation
