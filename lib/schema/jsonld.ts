@@ -3,7 +3,7 @@ import { SERVICES } from '@/lib/data/services'
 import { LOCATIONS } from '@/lib/data/locations'
 import { FAQS } from '@/lib/data/faqs'
 
-const BASE_URL = 'https://blueroseauto.com'
+const BASE_URL = 'https://www.blueroseautodetailing.com'
 
 export function localBusinessSchema() {
   return {

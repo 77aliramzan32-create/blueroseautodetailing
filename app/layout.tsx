@@ -6,8 +6,10 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import StickyCtaBar from '@/components/layout/StickyCtaBar'
 
+const SITE_URL = 'https://www.blueroseautodetailing.com'
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://blueroseauto.com'),
+  metadataBase: new URL(SITE_URL),
   title: {
     template: '%s | Blue Rose Auto Detailing',
     default: 'Blue Rose Auto Detailing Services | Springfield & Eugene, OR',
@@ -32,12 +34,18 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true },
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://blueroseauto.com',
+    url: SITE_URL,
     siteName: 'Blue Rose Auto Detailing Services',
     title: 'Blue Rose Auto Detailing Services | Springfield & Eugene, OR',
     description:
@@ -59,12 +67,12 @@ export const metadata: Metadata = {
     images: ['/images/og-default.jpg'],
   },
   verification: {
-    // Replace with real Google Search Console verification token
-    // google: 'YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE',
+    google: 'JBiuznXQwKLec9eIAHt4ev2nwofi5SKOg9ZcAXnKOqY',
   },
   alternates: {
-    canonical: 'https://blueroseauto.com',
+    canonical: SITE_URL,
   },
+  category: 'Automotive Services',
 }
 
 export const viewport: Viewport = {
@@ -78,10 +86,10 @@ export const viewport: Viewport = {
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'AutomotiveBusiness',
-  '@id': 'https://blueroseauto.com/#business',
+  '@id': `${SITE_URL}/#business`,
   name: 'Blue Rose Auto Detailing Services',
   legalName: 'Blue Rose Auto Detailing Services',
-  url: 'https://blueroseauto.com',
+  url: SITE_URL,
   telephone: '+15413379893',
   foundingDate: '1994',
   description:
@@ -101,24 +109,9 @@ const localBusinessSchema = {
     longitude: -122.9896,
   },
   openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '08:00',
-      closes: '17:00',
-    },
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Tuesday'],
-      opens: '08:30',
-      closes: '17:00',
-    },
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Saturday'],
-      opens: '10:00',
-      closes: '17:00',
-    },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '17:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Tuesday'], opens: '08:30', closes: '17:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Saturday'], opens: '10:00', closes: '17:00' },
   ],
   aggregateRating: {
     '@type': 'AggregateRating',
@@ -145,22 +138,29 @@ const localBusinessSchema = {
     'https://www.instagram.com/blueroseauto',
   ],
   hasMap: 'https://maps.google.com/?q=3436+Olympic+Street+Springfield+OR+97478',
-  image: 'https://blueroseauto.com/images/og-default.jpg',
+  image: `${SITE_URL}/images/og-default.jpg`,
 }
 
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  '@id': 'https://blueroseauto.com/#organization',
+  '@id': `${SITE_URL}/#organization`,
   name: 'Blue Rose Auto Detailing Services',
-  url: 'https://blueroseauto.com',
+  url: SITE_URL,
   logo: {
     '@type': 'ImageObject',
-    url: 'https://blueroseauto.com/images/logo.png',
+    url: `${SITE_URL}/images/logo.png`,
     width: 200,
     height: 60,
   },
   foundingDate: '1994',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+15413379893',
+    contactType: 'customer service',
+    areaServed: 'US-OR',
+    availableLanguage: 'English',
+  },
   sameAs: [
     'https://www.facebook.com/BlueRoseAuto',
     'https://www.youtube.com/@BLUEROSEAUTO',
@@ -171,35 +171,23 @@ const organizationSchema = {
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  '@id': 'https://blueroseauto.com/#website',
+  '@id': `${SITE_URL}/#website`,
   name: 'Blue Rose Auto Detailing Services',
-  url: 'https://blueroseauto.com',
-  publisher: {
-    '@id': 'https://blueroseauto.com/#organization',
-  },
+  url: SITE_URL,
+  publisher: { '@id': `${SITE_URL}/#organization` },
   potentialAction: {
     '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: 'https://blueroseauto.com/?s={search_term_string}',
-    },
+    target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/?s={search_term_string}` },
     'query-input': 'required name=search_term_string',
   },
 }
 
 // ── Root Layout ──────────────────────────────────────────────────────────────
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${barlow.variable} ${inter.variable}`}>
       <head>
-        {/* Google Search Console — replace with real verification code */}
-        {/* <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" /> */}
-
         {/* LocalBusiness JSON-LD */}
         <script
           type="application/ld+json"
@@ -217,16 +205,6 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {/* GTM noscript — replace GTM-XXXXXXX with real container ID */}
-        {/* <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          />
-        </noscript> */}
-
         <Header />
         <main className="pb-20 md:pb-0">{children}</main>
         <Footer />
@@ -238,22 +216,8 @@ export default function RootLayout({
           strategy="lazyOnload"
         />
         <Script id="ga4-init" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-XXXXXXXXXX', { page_path: window.location.pathname });
-          `}
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX',{page_path:window.location.pathname});`}
         </Script>
-
-        {/* GTM — uncomment and replace GTM-XXXXXXX with real container ID */}
-        {/* <Script id="gtm-init" strategy="lazyOnload">
-          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-XXXXXXX');`}
-        </Script> */}
       </body>
     </html>
   )

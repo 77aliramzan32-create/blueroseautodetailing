@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 
-const BASE_URL = 'https://blueroseauto.com'
+const BASE_URL = 'https://www.blueroseautodetailing.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
@@ -53,6 +53,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
+  // Overview pages
+  const overviewPages: MetadataRoute.Sitemap = [
+    { url: `${BASE_URL}/services`,  lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE_URL}/locations`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/book`,      lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+  ]
+
   // Core informational pages
   const infoPages: MetadataRoute.Sitemap = [
     { url: `${BASE_URL}/about`,   lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
@@ -64,8 +71,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Blog
   const blogPages: MetadataRoute.Sitemap = [
-    { url: `${BASE_URL}/blog`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${BASE_URL}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.6 },
   ]
 
-  return [...home, ...servicePages, ...locationPages, ...infoPages, ...blogPages]
+  return [...home, ...overviewPages, ...servicePages, ...locationPages, ...infoPages, ...blogPages]
 }

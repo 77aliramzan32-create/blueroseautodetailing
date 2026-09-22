@@ -6,8 +6,10 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
+        disallow: ['/admin', '/admin/', '/api/'],
       },
     ],
-    sitemap: 'https://blueroseauto.com/sitemap.xml',
+    sitemap: 'https://www.blueroseautodetailing.com/sitemap.xml',
+    host: 'https://www.blueroseautodetailing.com',
   }
 }
