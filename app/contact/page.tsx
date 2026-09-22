@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   title: 'Contact Blue Rose Auto Detailing | Springfield, OR — (541) 337-9893',
   description:
     'Get a free auto detailing quote from Blue Rose Auto Detailing Services in Springfield, OR. Call (541) 337-9893, text, or use our contact form. Located at 3436 Olympic Street.',
+  alternates: { canonical: '/contact' },
+  openGraph: { url: '/contact', type: 'website' },
 }
 
 function MapPinIcon() {
@@ -384,43 +386,34 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* ── Google Map Placeholder ─────────────────────────────────────── */}
+          {/* ── Google Map ──────────────────────────────────────────────────── */}
           <div className="mt-12">
-            {/* GOOGLE MAP: embed iframe here */}
-            <div
-              className="w-full rounded-xl border border-edge bg-card overflow-hidden"
-              style={{ minHeight: '300px' }}
-              role="region"
-              aria-label="Map showing Blue Rose Auto Detailing location"
-            >
-              <div className="flex flex-col items-center justify-center h-full min-h-[300px] gap-4 px-6 py-12 text-center">
-                <div className="w-14 h-14 rounded-full bg-[rgba(200,36,63,0.10)] border border-[rgba(200,36,63,0.20)] flex items-center justify-center text-accent">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path
-                      d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className="font-display font-bold text-xl text-ink mb-1">
-                    {BUSINESS.name}
-                  </p>
-                  <p className="font-body text-sm text-ink-muted">{BUSINESS.address.full}</p>
-                </div>
-                <a
-                  href={`https://maps.google.com/?q=${BUSINESS.address.mapQuery}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 font-body font-semibold text-sm text-accent hover:underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
-                  aria-label="Open in Google Maps (opens in new tab)"
-                >
-                  Open in Google Maps
-                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                    <path d="M2 10L10 2M5 2h5v5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </a>
-              </div>
+            <div className="w-full rounded-xl border border-edge overflow-hidden" style={{ height: '420px' }}>
+              <iframe
+                src={BUSINESS.gmbEmbed}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                title="Blue Rose Auto Detailing location on Google Maps"
+                aria-label="Google Map showing Blue Rose Auto Detailing at 3436 Olympic Street, Springfield, OR"
+              />
+            </div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-3 px-1">
+              <p className="font-body text-sm text-ink-muted">
+                📍 {BUSINESS.address.full} &middot; Plus code: {BUSINESS.plusCode}
+              </p>
+              <a
+                href={BUSINESS.gmb}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 font-body text-sm font-semibold text-accent hover:underline underline-offset-2 shrink-0"
+                aria-label="Open Blue Rose Auto Detailing on Google Maps (opens in new tab)"
+              >
+                Open in Google Maps ↗
+              </a>
             </div>
           </div>
         </div>

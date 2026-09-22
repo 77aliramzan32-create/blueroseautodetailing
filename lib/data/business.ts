@@ -1,4 +1,4 @@
-﻿// Central source of truth for all business facts.
+// Central source of truth for all business facts.
 // Every page and schema references this — never hardcode business data elsewhere.
 
 export const BUSINESS = {
@@ -11,7 +11,11 @@ export const BUSINESS = {
   founded: '1994',
   phone: '(541) 337-9893',
   phonePlain: '5413379893',
-  email: '', // placeholder — add if available
+  email: '',
+  website: 'https://www.blueroseautodetailing.com',
+  gmb: 'https://share.google/oNmdHZeW8cQVwR5lG',
+  gmbEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2867.1491046358997!2d-122.97971662463446!3d44.05962962605072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54c11dd3fa6dce07%3A0xd9fab800ef0229e2!2sBlue%20Rose%20Auto%20Care%20%26%20Repair%20Services!5e0!3m2!1sen!2s!4v1790106096551!5m2!1sen!2s',
+  plusCode: '325F+V4 Springfield, Oregon, USA',
   address: {
     street: 'Suite 100, 3436 Olympic Street',
     city: 'Springfield',
@@ -20,7 +24,10 @@ export const BUSINESS = {
     full: 'Suite 100, 3436 Olympic Street, Springfield, OR 97478',
     mapQuery: '3436+Olympic+Street+Springfield+OR+97478',
   },
-  website: 'https://blueroseauto.com',
+  geo: {
+    latitude: 44.05962962605072,
+    longitude: -122.97971662463446,
+  },
   googleRating: 5.0,
   reviewCount: 5,
   priceRange: '$$',
@@ -56,4 +63,4 @@ export const BUSINESS = {
 } as const
 
 export type BusinessHour = (typeof BUSINESS.hours)[number]
-export type TeamMember = (typeof BUSINESS.team)[number]
+export type TeamMember   = (typeof BUSINESS.team)[number]

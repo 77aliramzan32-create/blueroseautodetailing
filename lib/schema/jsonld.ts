@@ -1,4 +1,4 @@
-﻿import { BUSINESS } from '@/lib/data/business'
+import { BUSINESS } from '@/lib/data/business'
 import { SERVICES } from '@/lib/data/services'
 import { LOCATIONS } from '@/lib/data/locations'
 import { FAQS } from '@/lib/data/faqs'
@@ -26,9 +26,10 @@ export function localBusinessSchema() {
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: 44.0509,
-      longitude: -122.9963,
+      latitude: BUSINESS.geo.latitude,
+      longitude: BUSINESS.geo.longitude,
     },
+    hasMap: BUSINESS.gmb,
     openingHoursSpecification: BUSINESS.hoursSchema.map((h) => ({
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: h.dayOfWeek,
@@ -47,6 +48,7 @@ export function localBusinessSchema() {
       worstRating: 1,
     },
     sameAs: [
+      BUSINESS.gmb,
       BUSINESS.social.facebook,
       BUSINESS.social.youtube,
       BUSINESS.social.instagram,
@@ -85,6 +87,7 @@ export function organizationSchema() {
       availableLanguage: 'English',
     },
     sameAs: [
+      BUSINESS.gmb,
       BUSINESS.social.facebook,
       BUSINESS.social.youtube,
       BUSINESS.social.instagram,
@@ -129,6 +132,7 @@ export function locationServiceSchema(locationSlug: string) {
     description: `Professional auto detailing services serving ${location.fullName} — Blue Rose Auto Detailing Services in Springfield, OR.`,
     url: `${BASE_URL}/locations/${location.slug}`,
     telephone: BUSINESS.phone,
+    hasMap: BUSINESS.gmb,
     address: {
       '@type': 'PostalAddress',
       streetAddress: BUSINESS.address.street,
@@ -136,6 +140,11 @@ export function locationServiceSchema(locationSlug: string) {
       addressRegion: BUSINESS.address.state,
       postalCode: BUSINESS.address.zip,
       addressCountry: 'US',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: BUSINESS.geo.latitude,
+      longitude: BUSINESS.geo.longitude,
     },
     areaServed: {
       '@type': 'City',
@@ -147,6 +156,7 @@ export function locationServiceSchema(locationSlug: string) {
       reviewCount: BUSINESS.reviewCount,
       bestRating: 5,
     },
+    sameAs: [BUSINESS.gmb],
   }
 }
 

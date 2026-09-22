@@ -115,8 +115,8 @@ const localBusinessSchema = {
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 44.0462,
-    longitude: -122.9896,
+    latitude: 44.05962962605072,
+    longitude: -122.97971662463446,
   },
   openingHoursSpecification: [
     { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '17:00' },
@@ -142,13 +142,14 @@ const localBusinessSchema = {
     { '@type': 'City', name: 'Cottage Grove', containedInPlace: { '@type': 'State', name: 'Oregon' } },
     { '@type': 'City', name: 'Junction City', containedInPlace: { '@type': 'State', name: 'Oregon' } },
   ],
+  hasMap: 'https://share.google/oNmdHZeW8cQVwR5lG',
+  image: `${SITE_URL}/images/og-default.jpg`,
   sameAs: [
+    'https://share.google/oNmdHZeW8cQVwR5lG',
     'https://www.facebook.com/BlueRoseAuto',
     'https://www.youtube.com/@BLUEROSEAUTO',
     'https://www.instagram.com/blueroseauto',
   ],
-  hasMap: 'https://maps.google.com/?q=3436+Olympic+Street+Springfield+OR+97478',
-  image: `${SITE_URL}/images/og-default.jpg`,
 }
 
 const organizationSchema = {
