@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { LOCATIONS, getLocation } from '@/lib/data/locations'
 import { BUSINESS } from '@/lib/data/business'
 import { locationServiceSchema, breadcrumbSchema } from '@/lib/schema/jsonld'
@@ -237,34 +238,58 @@ export default async function Page({
 
         {/* ── SECTION 1: Page Header ──────────────────────────────────────── */}
         <section
-          className="relative w-full overflow-hidden"
-          style={{
-            background:
-              'linear-gradient(to bottom, #0D0D0F 0%, #0A0A0B 60%, #0A0A0B 100%)',
-          }}
+          className="relative w-full overflow-hidden min-h-[52vh] md:min-h-[48vh] bg-surface"
           aria-label={`Auto Detailing in ${location.city}, OR`}
         >
+          {/* Background — shop exterior at very low opacity */}
+          <div className="absolute inset-0 z-0" aria-hidden="true">
+            <Image
+              src="/images/gallery/auto-detailing-porsche-911-turbo-blue-exterior-springfield-or.webp"
+              alt=""
+              fill
+              priority
+              className="object-cover object-[center_40%] opacity-20 md:opacity-25"
+              sizes="100vw"
+            />
+            {/* Mobile overlay */}
+            <div
+              className="absolute inset-0 md:hidden"
+              style={{
+                background:
+                  'linear-gradient(160deg, rgba(10,10,11,0.82) 0%, rgba(10,10,11,0.60) 50%, rgba(10,10,11,0.85) 100%)',
+              }}
+            />
+            {/* Desktop overlay */}
+            <div
+              className="absolute inset-0 hidden md:block"
+              style={{
+                background:
+                  'linear-gradient(to bottom, rgba(10,10,11,0.65) 0%, rgba(10,10,11,0.78) 60%, rgba(10,10,11,0.98) 100%)',
+              }}
+            />
+          </div>
+
           {/* Subtle red glow top-left */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -top-24 -left-24 w-[480px] h-[480px] rounded-full"
+            className="pointer-events-none absolute -top-24 -left-24 w-[480px] h-[480px] rounded-full z-0"
             style={{
               background:
-                'radial-gradient(circle, rgba(200,36,63,0.07) 0%, transparent 70%)',
+                'radial-gradient(circle, rgba(200,36,63,0.08) 0%, transparent 70%)',
             }}
           />
           {/* Grid texture */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0"
+            className="pointer-events-none absolute inset-0 z-0"
             style={{
               backgroundImage:
-                'linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)',
+                'linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px)',
               backgroundSize: '40px 40px',
             }}
           />
 
-          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16 md:pb-24">
+          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 md:pt-20 md:pb-24">
             {/* Breadcrumb */}
             <div className="mb-8">
               <Breadcrumb
@@ -310,11 +335,11 @@ export default async function Page({
                 : `Professional detailing services by Blue Rose — located in Springfield, OR, proudly serving ${location.city} customers.`}
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-8">
+            {/* CTA Buttons — stacked on mobile, inline from sm */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-8">
               <a
                 href={`tel:${BUSINESS.phonePlain}`}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-base text-white transition-all duration-200 hover:shadow-[0_0_20px_4px_rgba(200,36,63,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0B]"
+                className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold text-base text-white transition-all duration-200 hover:shadow-[0_0_20px_4px_rgba(200,36,63,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0B] w-full sm:w-auto"
                 style={{
                   background: '#C8243F',
                   focusVisibleRing: '#C8243F',
@@ -326,7 +351,7 @@ export default async function Page({
               </a>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-base transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold text-base transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 w-full sm:w-auto"
                 style={{
                   color: '#C8243F',
                   border: '1px solid rgba(200,36,63,0.35)',

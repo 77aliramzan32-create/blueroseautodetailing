@@ -181,8 +181,8 @@ export default function HomePage() {
         ctaPrimary={{ label: 'Book a Detail', href: '/contact' }}
         ctaSecondary={{ label: 'View Services', href: '/services/auto-detailing' }}
         badge="Owner-Operated Since 1994"
-        imageAlt="Blue Rose Auto Detailing shop in Springfield, OR — professional auto detailing services"
-        imageSrc="/images/hero-home.jpg"
+        imageAlt="Porsche 911 Turbo exterior detail — Blue Rose Auto Detailing Springfield OR"
+        imageSrc="/images/gallery/auto-detailing-porsche-911-turbo-blue-exterior-springfield-or.webp"
       />
 
       {/* 2. Trust Bar */}

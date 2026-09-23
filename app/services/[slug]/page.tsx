@@ -197,11 +197,10 @@ export default async function Page({
           Section 1 — Page Hero / Header
       ══════════════════════════════════════════════════════════════════ */}
       <section
-        className="relative w-full overflow-hidden bg-surface"
-        style={{ minHeight: '40vh' }}
+        className="relative w-full overflow-hidden bg-surface min-h-[55vh] md:min-h-[52vh]"
         aria-label={`${service.name} service overview`}
       >
-        {/* Hero image — positioned behind content */}
+        {/* Hero image */}
         {service.heroImage && (
           <div className="absolute inset-0 z-0">
             <Image
@@ -209,16 +208,25 @@ export default async function Page({
               alt={service.heroAlt}
               fill
               priority
-              className="object-cover object-center opacity-20"
+              className="object-cover object-[center_30%] opacity-30 md:opacity-35"
               sizes="100vw"
             />
-            {/* gradient overlay to keep text readable */}
+            {/* Mobile: even vignette overlay */}
             <div
               aria-hidden="true"
-              className="absolute inset-0"
+              className="absolute inset-0 md:hidden"
               style={{
                 background:
-                  'linear-gradient(to bottom, rgba(10,10,11,0.65) 0%, rgba(10,10,11,0.80) 60%, rgba(10,10,11,0.98) 100%)',
+                  'linear-gradient(160deg, rgba(10,10,11,0.78) 0%, rgba(10,10,11,0.55) 50%, rgba(10,10,11,0.80) 100%)',
+              }}
+            />
+            {/* Desktop: top-to-bottom fade */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 hidden md:block"
+              style={{
+                background:
+                  'linear-gradient(to bottom, rgba(10,10,11,0.60) 0%, rgba(10,10,11,0.75) 55%, rgba(10,10,11,0.98) 100%)',
               }}
             />
           </div>
@@ -235,7 +243,7 @@ export default async function Page({
         />
 
         {/* Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 md:pt-16 md:pb-24">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 md:pt-20 md:pb-24">
           {/* Breadcrumb */}
           <div className="mb-8">
             <Breadcrumb
@@ -262,12 +270,12 @@ export default async function Page({
           </div>
 
           {/* Headline */}
-          <h1 className="font-display text-5xl md:text-6xl font-extrabold text-ink leading-tight mb-4">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-ink leading-tight mb-4">
             {service.name}
           </h1>
 
           {/* Tagline */}
-          <p className="font-body text-lg md:text-xl text-ink-muted mb-8 max-w-2xl leading-relaxed">
+          <p className="font-body text-base sm:text-lg md:text-xl text-ink-muted mb-6 md:mb-8 max-w-2xl leading-relaxed">
             {service.tagline}
           </p>
 
@@ -287,11 +295,11 @@ export default async function Page({
             </p>
           </div>
 
-          {/* CTA buttons */}
+          {/* CTA buttons — stacked on mobile, inline from sm */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <a
               href="tel:5413379893"
-              className="inline-flex items-center justify-center gap-2 font-body font-bold text-base px-7 py-4 rounded-xl bg-accent text-white transition-all duration-200 hover:bg-[#a81d34] hover:shadow-[0_0_24px_4px_rgba(200,36,63,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+              className="inline-flex items-center justify-center gap-2 font-body font-bold text-base px-7 py-4 rounded-xl bg-accent text-white transition-all duration-200 hover:bg-[#a81d34] hover:shadow-[0_0_24px_4px_rgba(200,36,63,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface w-full sm:w-auto"
               aria-label="Call Blue Rose Auto Detailing at (541) 337-9893"
             >
               <PhoneIcon />
@@ -299,7 +307,7 @@ export default async function Page({
             </a>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 font-body font-bold text-base px-7 py-4 rounded-xl bg-transparent text-accent border border-accent transition-all duration-200 hover:bg-accent-wash focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+              className="inline-flex items-center justify-center gap-2 font-body font-bold text-base px-7 py-4 rounded-xl bg-transparent text-accent border border-accent transition-all duration-200 hover:bg-accent-wash focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface w-full sm:w-auto"
             >
               Get a Free Quote
               <ArrowRightIcon />

@@ -51,7 +51,7 @@ export const SERVICES: Service[] = [
     ],
     faqIds: ['detail-how-long', 'detail-how-often', 'bring-car-in'],
     heroAlt: 'Full auto detailing in Springfield OR — Blue Rose Auto Detailing Services',
-    heroImage: '/images/auto-detailing-springfield-or-blue-rose.jpg',
+    heroImage: '/images/gallery/auto-detailing-maserati-levante-black-suv-exterior-springfield-or.webp',
     metaTitle: 'Auto Detailing in Springfield & Eugene, OR | Blue Rose',
     metaDescription:
       'Professional full interior & exterior auto detailing in Springfield, OR. Clay bar, machine polish, carpet extraction, leather conditioning. Call (541) 337-9893.',
@@ -87,7 +87,7 @@ export const SERVICES: Service[] = [
     ],
     faqIds: ['correction-how-long', 'correction-vs-polish', 'correction-before-ceramic'],
     heroAlt: 'Paint correction removing swirl marks on dark paint — Blue Rose Auto Detailing Springfield OR',
-    heroImage: '/images/paint-correction-eugene-or-blue-rose.jpg',
+    heroImage: '/images/gallery/paint-correction-audi-rs7-grey-polishing-process-springfield-or.webp',
     metaTitle: 'Paint Correction in Eugene & Springfield, OR | Blue Rose',
     metaDescription:
       'Professional multi-stage paint correction removing swirls, scratches & oxidation in Springfield, OR. Paint thickness gauged on every car. Call (541) 337-9893.',
@@ -122,7 +122,7 @@ export const SERVICES: Service[] = [
     ],
     faqIds: ['ceramic-cost', 'ceramic-how-long', 'ceramic-vs-wax', 'ceramic-ppf-combo'],
     heroAlt: 'Ceramic coating water beading on black car — Blue Rose Auto Detailing Springfield OR',
-    heroImage: '/images/ceramic-coating-springfield-or-blue-rose.jpg',
+    heroImage: '/images/gallery/auto-detailing-porsche-911-turbo-blue-exterior-springfield-or.webp',
     metaTitle: 'Ceramic Coating in Springfield & Eugene, OR | Blue Rose',
     metaDescription:
       'Professional ceramic coating applied over corrected paint in Springfield, OR. 2–5 year protection, deep gloss, hydrophobic finish. Call (541) 337-9893.',
@@ -157,7 +157,7 @@ export const SERVICES: Service[] = [
     ],
     faqIds: ['ppf-vs-ceramic', 'ppf-how-long-lasts', 'ceramic-ppf-combo'],
     heroAlt: 'Paint protection film applied to hood and bumper — Blue Rose Auto Detailing Springfield OR',
-    heroImage: '/images/paint-protection-film-springfield-or-blue-rose.jpg',
+    heroImage: '/images/gallery/auto-detailing-land-rover-defender-blue-exterior-side-springfield-or.webp',
     metaTitle: 'Paint Protection Film (PPF) in Springfield, OR | Blue Rose',
     metaDescription:
       'Professional PPF installation for rock chip & road debris protection in Springfield, OR. Full-front, partial, or full-vehicle coverage. Call (541) 337-9893.',
@@ -192,7 +192,7 @@ export const SERVICES: Service[] = [
     ],
     faqIds: ['tint-legal-oregon', 'tint-how-long-lasts', 'tint-types'],
     heroAlt: 'Professional window tinting on car at Blue Rose Auto Detailing Springfield OR',
-    heroImage: '/images/window-tinting-springfield-or-blue-rose.jpg',
+    heroImage: '/images/gallery/auto-detailing-bmw-3-series-black-exterior-springfield-or.webp',
     metaTitle: 'Window Tinting in Springfield & Eugene, OR | Blue Rose',
     metaDescription:
       'Professional window tinting in Springfield, OR. UV-blocking, heat-reducing film types from standard to ceramic. Oregon-legal compliance advised. Call (541) 337-9893.',
@@ -227,7 +227,7 @@ export const SERVICES: Service[] = [
     ],
     faqIds: ['wrap-how-long', 'wrap-vs-paint', 'wrap-care'],
     heroAlt: 'Custom vinyl wrap color change on vehicle — Blue Rose Auto Detailing Springfield OR',
-    heroImage: '/images/vinyl-wraps-springfield-or-blue-rose.jpg',
+    heroImage: '/images/gallery/vinyl-wrap-blue-sports-car-process-springfield-or.webp',
     metaTitle: 'Vinyl Wraps in Springfield & Eugene, OR | Blue Rose',
     metaDescription:
       'Full vehicle & partial vinyl wraps in Springfield, OR. Color changes, matte & satin finishes, fleet wrapping. Reversible without damaging factory paint. Call (541) 337-9893.',
@@ -263,7 +263,7 @@ export const SERVICES: Service[] = [
     ],
     faqIds: ['rv-detail-how-long', 'rv-when-to-detail', 'bring-car-in'],
     heroAlt: 'RV detailing and oxidation removal — Blue Rose Auto Detailing Springfield OR',
-    heroImage: '/images/rv-detailing-springfield-or-blue-rose.jpg',
+    heroImage: '/images/gallery/rv-detailing-country-coach-intrigue-motorhome-springfield-or.webp',
     metaTitle: 'RV Detailing in Springfield & Eugene, OR | Blue Rose',
     metaDescription:
       'Professional RV detailing in Springfield, OR — oxidation removal, rubber roof treatment, awning cleaning, interior deep clean. All sizes. Call (541) 337-9893.',
@@ -299,7 +299,7 @@ export const SERVICES: Service[] = [
     ],
     faqIds: ['boat-detail-how-long', 'bring-car-in'],
     heroAlt: 'Boat detailing and hull polishing — Blue Rose Auto Detailing Springfield OR',
-    heroImage: '/images/boat-detailing-springfield-or-blue-rose.jpg',
+    heroImage: '/images/gallery/auto-detailing-shop-exterior-blue-rose-springfield-or.webp',
     metaTitle: 'Boat Detailing in Springfield & Eugene, OR | Blue Rose',
     metaDescription:
       'Professional boat & watercraft detailing in Springfield, OR — oxidation removal, waterline treatment, hull polishing, cockpit cleaning. Call (541) 337-9893.',
