@@ -12,8 +12,23 @@ export const metadata: Metadata = {
 }
 
 export default function LocationsPage() {
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Auto Detailing Service Areas — Lane County, OR',
+    url: 'https://www.blueroseautodetailing.com/locations',
+    itemListElement: LOCATIONS.map((loc, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: `Auto Detailing in ${loc.city}, OR`,
+      url: `https://www.blueroseautodetailing.com/locations/${loc.slug}`,
+    })),
+  }
+
   return (
-    <main className="bg-surface min-h-screen">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
+      <main className="bg-surface min-h-screen">
       <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <Breadcrumb items={[{ name: 'Locations', href: '/locations' }]} />
         <h1 className="font-display font-extrabold text-4xl md:text-6xl text-ink mt-6 mb-4">
@@ -79,5 +94,6 @@ export default function LocationsPage() {
 
       <CallToAction headline="Auto Detailing Near You" subtext="Bring your vehicle to our Springfield shop — serving all of Lane County and beyond." />
     </main>
+    </>
   )
 }

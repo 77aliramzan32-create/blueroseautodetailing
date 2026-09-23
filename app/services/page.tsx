@@ -12,8 +12,24 @@ export const metadata: Metadata = {
 }
 
 export default function ServicesPage() {
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Auto Detailing Services — Blue Rose Auto Detailing Springfield OR',
+    url: 'https://www.blueroseautodetailing.com/services',
+    itemListElement: SERVICES.map((svc, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: svc.name,
+      url: `https://www.blueroseautodetailing.com/services/${svc.slug}`,
+      description: svc.tagline,
+    })),
+  }
+
   return (
-    <main className="bg-surface min-h-screen">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
+      <main className="bg-surface min-h-screen">
       <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <Breadcrumb items={[{ name: 'Services', href: '/services' }]} />
         <h1 className="font-display font-extrabold text-4xl md:text-6xl text-ink mt-6 mb-4">
@@ -63,5 +79,6 @@ export default function ServicesPage() {
 
       <CallToAction headline="Ready to Get Started?" subtext="Call or text us at (541) 337-9893 — we quote every job before work begins." />
     </main>
+    </>
   )
 }

@@ -139,6 +139,36 @@ export default async function Page({
   ])
   const faqSchema = faqs.length > 0 ? faqPageSchema(service.faqIds) : null
 
+  const howToSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    '@id': `https://www.blueroseautodetailing.com/services/${slug}#howto`,
+    name: `How We Perform ${service.name} — Blue Rose Auto Detailing Springfield OR`,
+    description: service.summary,
+    totalTime: 'PT3H',
+    step: service.process.map((step, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: step.title,
+      text: step.description,
+    })),
+    supply: [
+      { '@type': 'HowToSupply', name: 'pH-neutral car shampoo' },
+      { '@type': 'HowToSupply', name: 'Microfiber towels' },
+      { '@type': 'HowToSupply', name: 'Clay bar' },
+    ],
+    tool: [
+      { '@type': 'HowToTool', name: 'Dual-action polisher' },
+      { '@type': 'HowToTool', name: 'Paint thickness gauge' },
+      { '@type': 'HowToTool', name: 'Steam cleaner' },
+    ],
+    performer: {
+      '@type': 'LocalBusiness',
+      '@id': 'https://www.blueroseautodetailing.com/#business',
+      name: 'Blue Rose Auto Detailing Services',
+    },
+  }
+
   return (
     <>
       {/* ── JSON-LD ─────────────────────────────────────────────────────── */}
@@ -158,6 +188,10 @@ export default async function Page({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
 
       {/* ══════════════════════════════════════════════════════════════════
           Section 1 — Page Hero / Header

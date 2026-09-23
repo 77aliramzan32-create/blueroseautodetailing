@@ -150,6 +150,29 @@ const localBusinessSchema = {
     'https://www.youtube.com/@BLUEROSEAUTO',
     'https://www.instagram.com/blueroseauto',
   ],
+  slogan: 'Professional Auto Detailing Since 1994',
+  paymentAccepted: ['Cash', 'Credit Card', 'Debit Card'],
+  currenciesAccepted: 'USD',
+  logo: {
+    '@type': 'ImageObject',
+    url: `${SITE_URL}/images/Blue-Rose-Auto.webp`,
+    width: 600,
+    height: 700,
+  },
+  knowsAbout: [
+    'Auto Detailing',
+    'Paint Correction',
+    'Ceramic Coating',
+    'Paint Protection Film',
+    'Window Tinting',
+    'Vinyl Wraps',
+    'RV Detailing',
+    'Boat Detailing',
+    'Clay Bar Decontamination',
+    'Machine Polishing',
+    'Interior Deep Cleaning',
+    'Leather Conditioning',
+  ],
 }
 
 const organizationSchema = {
@@ -193,6 +216,30 @@ const websiteSchema = {
   },
 }
 
+const ownerSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${SITE_URL}/#owner`,
+  name: 'Tristan',
+  jobTitle: 'Owner & Lead Detailer',
+  worksFor: { '@id': `${SITE_URL}/#business` },
+  knowsAbout: ['Auto Detailing', 'Paint Correction', 'Ceramic Coating', 'Machine Polishing'],
+}
+
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${SITE_URL}/#webpage`,
+  url: SITE_URL,
+  name: 'Blue Rose Auto Detailing Services | Springfield & Eugene, OR',
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['h1', 'h2', '.aeo-summary'],
+  },
+  about: { '@id': `${SITE_URL}/#business` },
+  isPartOf: { '@id': `${SITE_URL}/#website` },
+}
+
 // ── Root Layout ──────────────────────────────────────────────────────────────
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -213,6 +260,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        {/* Owner JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ownerSchema) }}
+        />
+        {/* Speakable JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }}
         />
       </head>
       <body>
