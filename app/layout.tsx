@@ -75,20 +75,24 @@ export const metadata: Metadata = {
   category: 'Automotive Services',
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
-      { url: '/icon.png',    sizes: '512x512', type: 'image/png' },
+      { url: '/favicon.ico',  sizes: '48x48',   type: 'image/x-icon' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png'    },
+      { url: '/icon.png',     sizes: '512x512', type: 'image/png'    },
     ],
     apple: [
       { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
     ],
     shortcut: '/favicon.ico',
+    other: [
+      { rel: 'manifest', url: '/site.webmanifest' },
+    ],
   },
 }
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0A0A0B',
+  themeColor: '#C8243F',
 }
 
 // ── Structured Data Schemas ──────────────────────────────────────────────────
@@ -246,6 +250,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${barlow.variable} ${inter.variable}`}>
       <head>
+        {/* Favicon + manifest — explicit links for Google crawler */}
+        <link rel="icon" href="/favicon.ico" sizes="48x48" />
+        <link rel="icon" href="/icon.png" type="image/png" sizes="512x512" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" sizes="180x180" />
+        <link rel="manifest" href="/site.webmanifest" />
         {/* LocalBusiness JSON-LD */}
         <script
           type="application/ld+json"
