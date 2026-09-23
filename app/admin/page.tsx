@@ -5,6 +5,7 @@ import type { Booking, BookingStatus } from '@/lib/supabase/types'
 import type { Metadata } from 'next'
 import ClientActions from './ClientActions'
 import StatusSelect from './StatusSelect'
+import AdminNotes from './AdminNotes'
 
 export const metadata: Metadata = {
   title: 'Admin — Blue Rose Bookings',
@@ -222,6 +223,9 @@ function BookingCard({ booking: b }: { booking: Booking }) {
         <CopyButton text={copyStr} />
         <DeleteButton id={b.id} name={b.name} />
       </div>
+
+      {/* Admin notes */}
+      <AdminNotes id={b.id} notes={b.admin_notes} />
     </div>
   )
 }
