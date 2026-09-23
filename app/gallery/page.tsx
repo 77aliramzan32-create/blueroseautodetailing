@@ -9,17 +9,17 @@ const BASE_URL = 'https://www.blueroseautodetailing.com'
 export const metadata: Metadata = {
   title: 'Auto Detailing Gallery | Real Project Photos — Blue Rose Springfield OR',
   description:
-    'Real auto detailing results from Blue Rose Auto Detailing — paint correction, ceramic coating, interior detail on Maserati, Land Rover Defender, BMW, Mercedes, Audi & more. Springfield & Eugene, OR.',
+    'Real auto detailing results from Blue Rose Auto Detailing — paint correction, ceramic coating, interior detail, RV detailing, vinyl wrap on Porsche 911, Audi RS7, Country Coach RV, Toyota, Jeep & more. Springfield & Eugene, OR.',
   alternates: { canonical: '/gallery' },
   openGraph: {
     title: 'Auto Detailing Gallery — Blue Rose Auto Detailing Springfield OR',
     description:
-      'Real project photos: Maserati Levante, Land Rover Defender, BMW, Mercedes, Audi — paint correction, ceramic coating & full detail in Springfield & Eugene, OR.',
+      'Real project photos: Porsche 911 Turbo, Audi RS7, Country Coach RV, Toyota, Dodge RAM, Jeep Wrangler — paint correction, interior detail, RV detailing & vinyl wrap in Springfield & Eugene, OR.',
     url: '/gallery',
     images: [{
-      url: '/images/gallery/auto-detailing-maserati-levante-black-suv-exterior-springfield-or.webp',
-      width: 1200, height: 1600,
-      alt: 'Maserati Levante after full auto detail — Blue Rose Auto Detailing Springfield OR',
+      url: '/images/gallery/auto-detailing-porsche-911-turbo-blue-exterior-springfield-or.webp',
+      width: 1200, height: 800,
+      alt: 'Porsche 911 Turbo after full auto detail — Blue Rose Auto Detailing Springfield OR',
     }],
   },
   robots: { index: true, follow: true },
@@ -30,7 +30,7 @@ const imageGallerySchema = {
   '@type': 'ImageGallery',
   name: 'Blue Rose Auto Detailing — Project Gallery',
   description:
-    'Real detailing results — paint correction, ceramic coating, interior detail, and full exterior detail on luxury vehicles in Springfield & Eugene, OR.',
+    'Real detailing results — paint correction, interior detail, RV detailing, vinyl wrap, and full exterior detail on Porsche, Audi, Toyota, Dodge RAM, Jeep, Country Coach RV and more in Springfield & Eugene, OR.',
   url: `${BASE_URL}/gallery`,
   author: {
     '@type': 'AutomotiveBusiness',

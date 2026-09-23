@@ -281,8 +281,8 @@ export default function HomePage() {
                 Real Results, Real Vehicles
               </h2>
               <p className="text-ink-muted mt-2 text-sm md:text-base max-w-xl">
-                Maserati, Land Rover, BMW, Mercedes, Audi — every vehicle gets the same obsessive
-                attention to detail.
+                Porsche 911, Audi RS7, Country Coach RV, Toyota, Dodge RAM, Jeep Wrangler — every vehicle
+                gets the same obsessive attention to detail.
               </p>
             </div>
             <Link
@@ -323,7 +323,7 @@ export default function HomePage() {
               href="/gallery"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-edge bg-card text-ink-muted hover:border-edge-accent hover:text-ink font-semibold text-sm transition-colors"
             >
-              See All {28} Photos →
+              See All {19} Photos →
             </Link>
           </div>
         </div>
