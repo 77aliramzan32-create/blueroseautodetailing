@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next'
+import { GALLERY } from '@/lib/data/gallery'
 
 const BASE_URL = 'https://www.blueroseautodetailing.com'
 
@@ -74,5 +75,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.6 },
   ]
 
-  return [...home, ...overviewPages, ...servicePages, ...locationPages, ...infoPages, ...blogPages]
+  // Gallery with image metadata (helps Google Images index)
+  const galleryPage: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/gallery`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+      images: GALLERY.map(item => `${BASE_URL}${item.src}`),
+    },
+  ]
+
+  return [...home, ...overviewPages, ...servicePages, ...locationPages, ...infoPages, ...blogPages, ...galleryPage]
 }

@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import Hero from '@/components/sections/Hero'
 import ServiceGrid from '@/components/sections/ServiceGrid'
 import TestimonialSection from '@/components/sections/TestimonialSection'
 import CallToAction from '@/components/sections/CallToAction'
 import { BUSINESS } from '@/lib/data/business'
+import { FEATURED_GALLERY } from '@/lib/data/gallery'
 
 // ── Page Metadata ────────────────────────────────────────────────────────────
 
@@ -267,7 +269,67 @@ export default function HomePage() {
       {/* 5. Testimonials */}
       <TestimonialSection />
 
-      {/* 6. Service Area */}
+      {/* 6. Our Work — Gallery Preview */}
+      <section aria-label="Our work — project photo gallery" className="w-full bg-surface py-14 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-end justify-between mb-8 gap-4">
+            <div>
+              <p className="font-body text-sm font-semibold text-accent tracking-widest uppercase mb-2">
+                Our Work
+              </p>
+              <h2 className="font-display font-bold text-3xl md:text-4xl text-ink">
+                Real Results, Real Vehicles
+              </h2>
+              <p className="text-ink-muted mt-2 text-sm md:text-base max-w-xl">
+                Maserati, Land Rover, BMW, Mercedes, Audi — every vehicle gets the same obsessive
+                attention to detail.
+              </p>
+            </div>
+            <Link
+              href="/gallery"
+              className="shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline underline-offset-2"
+              aria-label="View full project gallery"
+            >
+              View All →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 md:gap-3">
+            {FEATURED_GALLERY.map((item, i) => (
+              <Link
+                key={item.src}
+                href="/gallery"
+                className="group relative overflow-hidden rounded-xl bg-card border border-edge aspect-[3/4] block"
+                aria-label={item.title}
+              >
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading={i < 4 ? 'eager' : 'lazy'}
+                  quality={80}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                  <span className="text-white text-xs font-medium leading-snug">{item.title}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-6 text-center">
+            <Link
+              href="/gallery"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-edge bg-card text-ink-muted hover:border-edge-accent hover:text-ink font-semibold text-sm transition-colors"
+            >
+              See All {28} Photos →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Service Area */}
       <section
         aria-label="Service area — cities we serve"
         className="relative w-full bg-card border-y border-edge"

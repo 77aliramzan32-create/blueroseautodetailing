@@ -1,238 +1,180 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
 import Breadcrumb from '@/components/layout/Breadcrumb'
-import CallToAction from '@/components/sections/CallToAction'
+import { GALLERY, type GalleryCategory } from '@/lib/data/gallery'
+
+const BASE_URL = 'https://www.blueroseautodetailing.com'
 
 export const metadata: Metadata = {
-  title: 'Before & After Gallery — Auto Detailing, Ceramic Coating, PPF | Blue Rose Springfield OR',
+  title: 'Auto Detailing Gallery | Real Project Photos — Blue Rose Springfield OR',
   description:
-    'Browse before and after photos from Blue Rose Auto Detailing Services in Springfield, OR. Paint correction, ceramic coating, PPF, interior restoration, and more.',
+    'Real auto detailing results from Blue Rose Auto Detailing — paint correction, ceramic coating, interior detail on Maserati, Land Rover Defender, BMW, Mercedes, Audi & more. Springfield & Eugene, OR.',
+  alternates: { canonical: '/gallery' },
+  openGraph: {
+    title: 'Auto Detailing Gallery — Blue Rose Auto Detailing Springfield OR',
+    description:
+      'Real project photos: Maserati Levante, Land Rover Defender, BMW, Mercedes, Audi — paint correction, ceramic coating & full detail in Springfield & Eugene, OR.',
+    url: '/gallery',
+    images: [{
+      url: '/images/gallery/auto-detailing-maserati-levante-black-suv-exterior-springfield-or.webp',
+      width: 1200, height: 1600,
+      alt: 'Maserati Levante after full auto detail — Blue Rose Auto Detailing Springfield OR',
+    }],
+  },
+  robots: { index: true, follow: true },
 }
 
-/*
- * IMAGE PLACEHOLDERS: Replace each pair with real before/after photos.
- * Filenames should follow pattern:
- *   before-[service]-[vehicle]-[city].jpg
- *   after-[service]-[vehicle]-[city].jpg
- * Example: before-paint-correction-bmw-m3-springfield.jpg
- */
+const imageGallerySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageGallery',
+  name: 'Blue Rose Auto Detailing — Project Gallery',
+  description:
+    'Real detailing results — paint correction, ceramic coating, interior detail, and full exterior detail on luxury vehicles in Springfield & Eugene, OR.',
+  url: `${BASE_URL}/gallery`,
+  author: {
+    '@type': 'AutomotiveBusiness',
+    '@id': `${BASE_URL}/#business`,
+    name: 'Blue Rose Auto Detailing Services',
+  },
+  image: GALLERY.map(item => ({
+    '@type': 'ImageObject',
+    contentUrl: `${BASE_URL}${item.src}`,
+    name: item.title,
+    description: item.alt,
+    creditText: 'Blue Rose Auto Detailing Services, Springfield OR',
+    acquireLicensePage: `${BASE_URL}/gallery`,
+  })),
+}
 
-const GALLERY_PAIRS = [
-  {
-    id: 'paint-correction-bmw',
-    service: 'Paint Correction',
-    vehicle: '2019 BMW M3',
-    location: 'Springfield, OR',
-    beforeAlt: 'Before paint correction on 2019 BMW M3 — swirl marks and light scratches visible',
-    afterAlt: 'After paint correction on 2019 BMW M3 — mirror-like finish, swirls eliminated',
-    beforeImage: null, // replace with: '/images/gallery/before-paint-correction-bmw-m3-springfield.jpg'
-    afterImage: null,  // replace with: '/images/gallery/after-paint-correction-bmw-m3-springfield.jpg'
-  },
-  {
-    id: 'ceramic-corvette-interior',
-    service: 'Interior Restoration',
-    vehicle: '2005 Corvette',
-    location: 'Springfield, OR',
-    beforeAlt: 'Before interior restoration on 2005 Corvette — aged leather and worn carpet',
-    afterAlt: 'After interior restoration on 2005 Corvette — leather restored, interior like new',
-    beforeImage: null,
-    afterImage: null,
-  },
-  {
-    id: 'ceramic-coating-suv',
-    service: 'Ceramic Coating',
-    vehicle: '2022 Ford Explorer',
-    location: 'Eugene, OR',
-    beforeAlt: 'Before ceramic coating on 2022 Ford Explorer — paint oxidation and water spots',
-    afterAlt: 'After ceramic coating on 2022 Ford Explorer — deep gloss and hydrophobic finish',
-    beforeImage: null,
-    afterImage: null,
-  },
-  {
-    id: 'ppf-front-end',
-    service: 'Paint Protection Film',
-    vehicle: '2021 Subaru WRX',
-    location: 'Springfield, OR',
-    beforeAlt: 'Before PPF on 2021 Subaru WRX — paint vulnerable to rock chips',
-    afterAlt: 'After PPF on 2021 Subaru WRX — full front-end coverage, nearly invisible film',
-    beforeImage: null,
-    afterImage: null,
-  },
-  {
-    id: 'ceramic-ppf-combo',
-    service: 'Ceramic + PPF Combo',
-    vehicle: '2020 Toyota Tacoma',
-    location: 'Springfield, OR',
-    beforeAlt: 'Before ceramic and PPF combo on 2020 Toyota Tacoma',
-    afterAlt: 'After ceramic and PPF combo on 2020 Toyota Tacoma — maximum paint protection',
-    beforeImage: null,
-    afterImage: null,
-  },
-  {
-    id: 'interior-detail',
-    service: 'Full Interior Detail',
-    vehicle: '2018 Honda Pilot',
-    location: 'Eugene, OR',
-    beforeAlt: 'Before full interior detail on 2018 Honda Pilot — heavy soiling and stains',
-    afterAlt: 'After full interior detail on 2018 Honda Pilot — completely clean interior',
-    beforeImage: null,
-    afterImage: null,
-  },
-  {
-    id: 'rv-exterior-polish',
-    service: 'RV Exterior Polish',
-    vehicle: 'Class A Motorhome',
-    location: 'Springfield, OR',
-    beforeAlt: 'Before RV exterior polish — fiberglass oxidation and chalky finish',
-    afterAlt: 'After RV exterior polish — oxidation removed, fiberglass restored',
-    beforeImage: null,
-    afterImage: null,
-  },
-  {
-    id: 'window-tint-sedan',
-    service: 'Window Tinting',
-    vehicle: '2021 Honda Accord',
-    location: 'Springfield, OR',
-    beforeAlt: 'Before window tinting on 2021 Honda Accord — no tint',
-    afterAlt: 'After window tinting on 2021 Honda Accord — clean, professional ceramic tint',
-    beforeImage: null,
-    afterImage: null,
-  },
+const CATEGORY_LABELS: Record<GalleryCategory, string> = {
+  'exterior':         'Exterior Detail',
+  'interior':         'Interior Detail',
+  'process':          'The Process',
+  'ceramic':          'Ceramic Coating',
+  'paint-correction': 'Paint Correction',
+}
+
+const CATEGORY_LINKS: Record<GalleryCategory, string> = {
+  'exterior':         '/services/auto-detailing',
+  'interior':         '/services/auto-detailing',
+  'process':          '/services/auto-detailing',
+  'ceramic':          '/services/ceramic-coating',
+  'paint-correction': '/services/paint-correction',
+}
+
+const CATEGORY_ORDER: GalleryCategory[] = [
+  'exterior', 'paint-correction', 'ceramic', 'interior', 'process',
 ]
 
-function PlaceholderHalf({
-  label,
-  color,
-}: {
-  label: 'BEFORE' | 'AFTER'
-  color: string
-}) {
-  return (
-    <div
-      className={[
-        'relative flex-1 min-h-[140px] flex items-center justify-center',
-        color,
-      ].join(' ')}
-    >
-      <span
-        className={[
-          'font-display font-extrabold text-sm tracking-widest px-2 py-1 rounded',
-          label === 'BEFORE'
-            ? 'text-ink-muted bg-[rgba(0,0,0,0.5)]'
-            : 'text-white bg-[rgba(200,36,63,0.65)]',
-        ].join(' ')}
-        aria-hidden="true"
-      >
-        {label}
-      </span>
-    </div>
-  )
-}
-
 export default function GalleryPage() {
+  const grouped = CATEGORY_ORDER.map(cat => ({
+    cat,
+    label: CATEGORY_LABELS[cat],
+    link: CATEGORY_LINKS[cat],
+    items: GALLERY.filter(g => g.category === cat),
+  })).filter(g => g.items.length > 0)
+
   return (
     <>
-      {/* ── Page Header ───────────────────────────────────────────────────── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(imageGallerySchema) }}
+      />
+
+      {/* ── Header ─────────────────────────────────────────────────────────── */}
       <section className="relative w-full bg-surface border-b border-edge pt-10 pb-14 md:pt-14 md:pb-20">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0"
-          style={{
-            background:
-              'radial-gradient(ellipse 70% 60% at 50% 0%, rgba(200,36,63,0.06) 0%, transparent 70%)',
-          }}
+          className="pointer-events-none absolute inset-0"
+          style={{ background: 'radial-gradient(ellipse 70% 60% at 50% 0%, rgba(200,36,63,0.06) 0%, transparent 70%)' }}
         />
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumb items={[{ name: 'Gallery', href: '/gallery' }]} />
-          <h1 className="mt-6 font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-ink leading-tight">
-            Before &amp; After Gallery
-          </h1>
-          <p className="mt-4 font-body text-base md:text-lg text-ink-muted max-w-2xl leading-relaxed">
-            A look at the work coming out of our Springfield shop — paint correction, ceramic
-            coating, PPF, interior restoration, RV detailing, window tinting, and more. Every
-            vehicle in the gallery was inspected and released by Tristan personally.
-          </p>
-        </div>
-      </section>
-
-      {/* ── Gallery Grid ──────────────────────────────────────────────────── */}
-      <section
-        aria-label="Before and after photo gallery"
-        className="w-full bg-surface py-14 md:py-20"
-      >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
-            {GALLERY_PAIRS.map((pair) => (
-              <article
-                key={pair.id}
-                className="glass-card rounded-xl overflow-hidden flex flex-col"
-                aria-label={`${pair.service} — ${pair.vehicle}`}
-              >
-                {/* Before / After image area */}
-                <div className="flex h-44 border-b border-edge overflow-hidden">
-                  {pair.beforeImage ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={pair.beforeImage}
-                      alt={pair.beforeAlt}
-                      className="flex-1 object-cover"
-                    />
-                  ) : (
-                    <PlaceholderHalf label="BEFORE" color="bg-[rgba(255,255,255,0.03)]" />
-                  )}
-
-                  {/* Vertical divider */}
-                  <div className="w-px bg-edge shrink-0" aria-hidden="true" />
-
-                  {pair.afterImage ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={pair.afterImage}
-                      alt={pair.afterAlt}
-                      className="flex-1 object-cover"
-                    />
-                  ) : (
-                    <PlaceholderHalf label="AFTER" color="bg-[rgba(200,36,63,0.04)]" />
-                  )}
-                </div>
-
-                {/* Caption */}
-                <div className="p-4 flex flex-col gap-1">
-                  <p className="font-body text-xs font-semibold text-accent tracking-wide uppercase">
-                    {pair.service}
-                  </p>
-                  <p className="font-display font-bold text-base text-ink leading-tight">
-                    {pair.vehicle}
-                  </p>
-                  <p className="font-body text-xs text-ink-muted">{pair.location}</p>
-                </div>
-              </article>
-            ))}
+          <div className="mt-6">
+            <h1 className="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-ink leading-tight">
+              Our Work
+            </h1>
+            <p className="mt-3 text-base md:text-lg text-ink-muted max-w-2xl">
+              Real results on real vehicles — Maserati Levante, Land Rover Defender, BMW, Mercedes,
+              Audi and more. Paint correction, ceramic coating, interior detail, and full exterior washes
+              in Springfield &amp; Eugene, OR.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {grouped.map(g => (
+                <a key={g.cat} href={`#${g.cat}`}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-edge bg-card text-sm text-ink-muted hover:border-edge-accent hover:text-ink transition-colors">
+                  {g.label}
+                  <span className="text-ink-subtle text-xs">({g.items.length})</span>
+                </a>
+              ))}
+            </div>
           </div>
-
-          {/* Placeholder reminder for future images */}
-          <p className="mt-8 text-center font-body text-xs text-ink-muted">
-            Photos coming soon — check back or{' '}
-            <a
-              href={`https://www.instagram.com/blueroseauto`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-accent hover:underline underline-offset-2"
-              aria-label="Follow us on Instagram for latest work photos"
-            >
-              follow us on Instagram
-            </a>{' '}
-            for the latest work.
-          </p>
         </div>
       </section>
 
-      {/* ── CTA ───────────────────────────────────────────────────────────── */}
-      <CallToAction
-        headline="Like What You See?"
-        subtext="Get a free quote for your vehicle. Every job is priced honestly before we begin."
-        variant="accent-bg"
-      />
+      {/* ── Gallery by category ────────────────────────────────────────────── */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+        {grouped.map(({ cat, label, link, items }) => (
+          <section key={cat} id={cat} aria-labelledby={`heading-${cat}`}>
+            <div className="flex items-center gap-3 mb-6">
+              <h2 id={`heading-${cat}`} className="font-display font-bold text-2xl text-ink">
+                {label}
+              </h2>
+              <div className="flex-1 h-px bg-edge" />
+              <Link href={link} className="text-xs text-accent hover:underline underline-offset-2 shrink-0">
+                View Service →
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+              {items.map((item, i) => (
+                <figure
+                  key={item.src}
+                  className="group relative overflow-hidden rounded-xl bg-card border border-edge aspect-[3/4]"
+                >
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading={i < 4 ? 'eager' : 'lazy'}
+                    quality={85}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                    <figcaption className="text-white text-xs font-medium leading-snug">
+                      {item.title}
+                    </figcaption>
+                  </div>
+                </figure>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+
+      {/* ── CTA ────────────────────────────────────────────────────────────── */}
+      <section className="bg-card border-t border-edge py-14">
+        <div className="max-w-xl mx-auto px-4 text-center">
+          <h2 className="font-display font-bold text-2xl md:text-3xl text-ink mb-3">
+            Ready for results like these?
+          </h2>
+          <p className="text-ink-muted mb-6">
+            Springfield &amp; Eugene&apos;s most trusted detailing shop since 1994. Call or book online.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link href="/book"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-accent text-white font-bold hover:bg-accent-hover transition-colors">
+              Book Now →
+            </Link>
+            <a href="tel:5413379893"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-edge text-ink-muted hover:border-edge-bright hover:text-ink transition-colors font-semibold">
+              (541) 337-9893
+            </a>
+          </div>
+        </div>
+      </section>
     </>
   )
 }
