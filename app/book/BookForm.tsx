@@ -5,14 +5,14 @@ import Link from 'next/link'
 import { submitBooking } from '@/app/actions/booking'
 
 const SERVICES = [
-  { id: 'auto-detailing',        label: 'Full Auto Detail' },
+  { id: 'auto-detailing',        label: 'Auto Detail' },
   { id: 'paint-correction',      label: 'Paint Correction' },
   { id: 'ceramic-coating',       label: 'Ceramic Coating' },
-  { id: 'paint-protection-film', label: 'Paint Protection Film (PPF)' },
+  { id: 'paint-protection-film', label: 'PPF' },
   { id: 'window-tinting',        label: 'Window Tinting' },
   { id: 'vinyl-wraps',           label: 'Vinyl Wrap' },
-  { id: 'rv-detailing',          label: 'RV Detailing' },
-  { id: 'boat-detailing',        label: 'Boat Detailing' },
+  { id: 'rv-detailing',          label: 'RV Detail' },
+  { id: 'boat-detailing',        label: 'Boat Detail' },
 ]
 
 const TIMES = [
@@ -20,9 +20,15 @@ const TIMES = [
   '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM',
 ]
 
-const VEHICLE_TYPES = ['Car', 'Truck', 'SUV / Van', 'Motorcycle', 'RV', 'Boat', 'Other']
-
-const HOW_HEARD = ['Google Search', 'Google Maps', 'Facebook', 'Instagram', 'Referral / Friend', 'Returning Customer', 'Other']
+const VEHICLE_TYPES = [
+  { value: 'car',        label: 'Car' },
+  { value: 'truck',      label: 'Truck' },
+  { value: 'suv-van',   label: 'SUV / Van' },
+  { value: 'motorcycle', label: 'Motorcycle' },
+  { value: 'rv',         label: 'RV' },
+  { value: 'boat',       label: 'Boat' },
+  { value: 'other',      label: 'Other' },
+]
 
 function getMinDate() {
   const d = new Date()
@@ -46,13 +52,12 @@ export default function BookForm() {
     e.preventDefault()
     if (services.length === 0) { setError('Please select at least one service.'); return }
     setError('')
-    const form = e.currentTarget
-    const fd = new FormData(form)
+    const fd = new FormData(e.currentTarget)
     services.forEach(s => fd.append('services', s))
     startTransition(async () => {
       const res = await submitBooking(fd)
       if (res.success) setDone(true)
-      else setError(res.error ?? 'Something went wrong. Please call us at (541) 337-9893.')
+      else setError(res.error ?? 'Something went wrong. Call us at (541) 337-9893.')
     })
   }
 
@@ -82,157 +87,137 @@ export default function BookForm() {
   }
 
   return (
-    <div className="min-h-screen bg-surface">
+    <div className="bg-surface">
       {/* Header */}
       <div className="bg-card border-b border-edge pt-20 pb-8 px-4">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-xl mx-auto">
           <Link href="/" className="text-ink-subtle text-sm hover:text-ink transition-colors mb-4 inline-flex items-center gap-1">
-            ← Back to home
+            ← Back
           </Link>
           <h1 className="font-display font-extrabold text-4xl md:text-5xl text-ink mt-2">
             Book a <span className="text-accent">Detail</span>
           </h1>
-          <p className="text-ink-muted mt-2">
-            Fill out the form below and we&apos;ll confirm your appointment. Questions?{' '}
-            <a href="tel:5413379893" className="text-accent font-medium">(541) 337-9893</a>
+          <p className="text-ink-muted mt-2 text-sm">
+            Takes 2 minutes. We confirm within a few hours.{' '}
+            <a href="tel:5413379893" className="text-accent">(541) 337-9893</a>
           </p>
         </div>
       </div>
 
       {/* Form */}
-      <div className="max-w-2xl mx-auto px-4 py-10">
-        <form onSubmit={handleSubmit} className="space-y-8">
+      <div className="max-w-xl mx-auto px-4 py-8">
+        <form onSubmit={handleSubmit} className="space-y-6">
 
-          {/* ── Services ── */}
-          <section>
-            <h2 className="font-display font-bold text-xl text-ink mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-accent text-white text-xs flex items-center justify-center font-bold">1</span>
-              Select Service(s)
+          {/* ── Step 1: Services ── */}
+          <div className="bg-card border border-edge rounded-xl p-5">
+            <h2 className="font-display font-bold text-base text-ink mb-3 flex items-center gap-2">
+              <span className="w-5 h-5 rounded-full bg-accent text-white text-[10px] flex items-center justify-center font-bold shrink-0">1</span>
+              What service do you need?
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-2">
               {SERVICES.map(svc => (
                 <button
                   key={svc.id}
                   type="button"
                   onClick={() => toggleService(svc.id)}
-                  className={`text-left px-4 py-3 rounded-lg border text-sm font-medium transition-all ${
+                  className={`text-left px-3 py-2.5 rounded-lg border text-sm font-medium transition-all ${
                     services.includes(svc.id)
                       ? 'bg-accent-wash border-edge-accent text-ink'
-                      : 'bg-card border-edge text-ink-muted hover:border-edge-bright hover:text-ink'
+                      : 'bg-surface border-edge text-ink-muted hover:border-edge-bright hover:text-ink'
                   }`}
                 >
-                  <span className={`mr-2 ${services.includes(svc.id) ? 'text-accent' : 'text-ink-subtle'}`}>
+                  <span className={`mr-1.5 text-xs ${services.includes(svc.id) ? 'text-accent' : 'text-ink-subtle'}`}>
                     {services.includes(svc.id) ? '✓' : '○'}
                   </span>
                   {svc.label}
                 </button>
               ))}
             </div>
-          </section>
+          </div>
 
-          {/* ── Vehicle ── */}
-          <section>
-            <h2 className="font-display font-bold text-xl text-ink mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-accent text-white text-xs flex items-center justify-center font-bold">2</span>
-              Vehicle Details
+          {/* ── Step 2: Vehicle + Date/Time ── */}
+          <div className="bg-card border border-edge rounded-xl p-5">
+            <h2 className="font-display font-bold text-base text-ink mb-3 flex items-center gap-2">
+              <span className="w-5 h-5 rounded-full bg-accent text-white text-[10px] flex items-center justify-center font-bold shrink-0">2</span>
+              Your vehicle &amp; preferred time
             </h2>
             <div className="space-y-3">
+              {/* Vehicle type */}
               <div>
-                <label className="block text-sm text-ink-muted mb-1">Vehicle Type <span className="text-accent">*</span></label>
-                <div className="flex flex-wrap gap-2">
-                  {VEHICLE_TYPES.map(vt => (
-                    <label key={vt} className="cursor-pointer">
-                      <input type="radio" name="vehicle_type" value={vt.toLowerCase().replace(' / ', '-')} required className="sr-only peer" />
-                      <span className="px-3 py-1.5 rounded-lg border border-edge bg-card text-sm text-ink-muted peer-checked:border-edge-accent peer-checked:text-ink peer-checked:bg-accent-wash transition-all">
-                        {vt}
-                      </span>
-                    </label>
+                <label className="block text-sm text-ink-muted mb-1.5">Vehicle Type <span className="text-accent">*</span></label>
+                <select name="vehicle_type" required
+                  className="w-full bg-surface border border-edge rounded-lg px-3 py-2.5 text-sm text-ink focus:border-edge-accent focus:outline-none">
+                  <option value="">Select type…</option>
+                  {VEHICLE_TYPES.map(v => (
+                    <option key={v.value} value={v.value}>{v.label}</option>
                   ))}
-                </div>
-              </div>
-              <div className="grid grid-cols-3 gap-3">
-                <div>
-                  <label className="block text-sm text-ink-muted mb-1">Year</label>
-                  <input name="vehicle_year" type="text" placeholder="2022" maxLength={4}
-                    className="w-full bg-card border border-edge rounded-lg px-3 py-2 text-sm text-ink placeholder:text-ink-subtle focus:border-edge-accent focus:outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm text-ink-muted mb-1">Make</label>
-                  <input name="vehicle_make" type="text" placeholder="Toyota"
-                    className="w-full bg-card border border-edge rounded-lg px-3 py-2 text-sm text-ink placeholder:text-ink-subtle focus:border-edge-accent focus:outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm text-ink-muted mb-1">Model</label>
-                  <input name="vehicle_model" type="text" placeholder="Camry"
-                    className="w-full bg-card border border-edge rounded-lg px-3 py-2 text-sm text-ink placeholder:text-ink-subtle focus:border-edge-accent focus:outline-none" />
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* ── Date & Time ── */}
-          <section>
-            <h2 className="font-display font-bold text-xl text-ink mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-accent text-white text-xs flex items-center justify-center font-bold">3</span>
-              Preferred Date &amp; Time
-            </h2>
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="block text-sm text-ink-muted mb-1">Date <span className="text-accent">*</span></label>
-                <input name="preferred_date" type="date" required min={getMinDate()}
-                  className="w-full bg-card border border-edge rounded-lg px-3 py-2 text-sm text-ink focus:border-edge-accent focus:outline-none" />
-                <p className="text-xs text-ink-subtle mt-1">Mon–Sat only · Sun closed</p>
-              </div>
-              <div>
-                <label className="block text-sm text-ink-muted mb-1">Time <span className="text-accent">*</span></label>
-                <select name="preferred_time" required
-                  className="w-full bg-card border border-edge rounded-lg px-3 py-2 text-sm text-ink focus:border-edge-accent focus:outline-none">
-                  <option value="">Select a time</option>
-                  {TIMES.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
-            </div>
-          </section>
 
-          {/* ── Contact Info ── */}
-          <section>
-            <h2 className="font-display font-bold text-xl text-ink mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-accent text-white text-xs flex items-center justify-center font-bold">4</span>
-              Your Info
+              {/* Year Make Model — single field */}
+              <div>
+                <label className="block text-sm text-ink-muted mb-1.5">
+                  Year / Make / Model <span className="text-ink-subtle text-xs">(optional)</span>
+                </label>
+                <input
+                  name="vehicle_make"
+                  type="text"
+                  placeholder="e.g. 2022 Toyota Camry"
+                  className="w-full bg-surface border border-edge rounded-lg px-3 py-2.5 text-sm text-ink placeholder:text-ink-subtle focus:border-edge-accent focus:outline-none"
+                />
+              </div>
+
+              {/* Date + Time */}
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-sm text-ink-muted mb-1.5">Date <span className="text-accent">*</span></label>
+                  <input name="preferred_date" type="date" required min={getMinDate()}
+                    className="w-full bg-surface border border-edge rounded-lg px-3 py-2.5 text-sm text-ink focus:border-edge-accent focus:outline-none" />
+                  <p className="text-[11px] text-ink-subtle mt-1">Mon–Sat · Sun closed</p>
+                </div>
+                <div>
+                  <label className="block text-sm text-ink-muted mb-1.5">Time <span className="text-accent">*</span></label>
+                  <select name="preferred_time" required
+                    className="w-full bg-surface border border-edge rounded-lg px-3 py-2.5 text-sm text-ink focus:border-edge-accent focus:outline-none">
+                    <option value="">Pick a time</option>
+                    {TIMES.map(t => <option key={t} value={t}>{t}</option>)}
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── Step 3: Contact Info ── */}
+          <div className="bg-card border border-edge rounded-xl p-5">
+            <h2 className="font-display font-bold text-base text-ink mb-3 flex items-center gap-2">
+              <span className="w-5 h-5 rounded-full bg-accent text-white text-[10px] flex items-center justify-center font-bold shrink-0">3</span>
+              How do we reach you?
             </h2>
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-sm text-ink-muted mb-1">Full Name <span className="text-accent">*</span></label>
+                  <label className="block text-sm text-ink-muted mb-1.5">Name <span className="text-accent">*</span></label>
                   <input name="name" type="text" required placeholder="Jane Smith"
-                    className="w-full bg-card border border-edge rounded-lg px-3 py-2 text-sm text-ink placeholder:text-ink-subtle focus:border-edge-accent focus:outline-none" />
+                    className="w-full bg-surface border border-edge rounded-lg px-3 py-2.5 text-sm text-ink placeholder:text-ink-subtle focus:border-edge-accent focus:outline-none" />
                 </div>
                 <div>
-                  <label className="block text-sm text-ink-muted mb-1">Phone <span className="text-accent">*</span></label>
+                  <label className="block text-sm text-ink-muted mb-1.5">Phone <span className="text-accent">*</span></label>
                   <input name="phone" type="tel" required placeholder="(541) 555-0100"
-                    className="w-full bg-card border border-edge rounded-lg px-3 py-2 text-sm text-ink placeholder:text-ink-subtle focus:border-edge-accent focus:outline-none" />
+                    className="w-full bg-surface border border-edge rounded-lg px-3 py-2.5 text-sm text-ink placeholder:text-ink-subtle focus:border-edge-accent focus:outline-none" />
                 </div>
               </div>
               <div>
-                <label className="block text-sm text-ink-muted mb-1">Email <span className="text-ink-subtle text-xs">(optional)</span></label>
+                <label className="block text-sm text-ink-muted mb-1.5">Email <span className="text-ink-subtle text-xs">(optional)</span></label>
                 <input name="email" type="email" placeholder="jane@email.com"
-                  className="w-full bg-card border border-edge rounded-lg px-3 py-2 text-sm text-ink placeholder:text-ink-subtle focus:border-edge-accent focus:outline-none" />
+                  className="w-full bg-surface border border-edge rounded-lg px-3 py-2.5 text-sm text-ink placeholder:text-ink-subtle focus:border-edge-accent focus:outline-none" />
               </div>
               <div>
-                <label className="block text-sm text-ink-muted mb-1">Notes / Special Requests <span className="text-ink-subtle text-xs">(optional)</span></label>
-                <textarea name="notes" rows={3} placeholder="E.g. dog hair removal, specific areas of concern, custom requests..."
-                  className="w-full bg-card border border-edge rounded-lg px-3 py-2 text-sm text-ink placeholder:text-ink-subtle focus:border-edge-accent focus:outline-none resize-none" />
-              </div>
-              <div>
-                <label className="block text-sm text-ink-muted mb-1">How did you hear about us? <span className="text-ink-subtle text-xs">(optional)</span></label>
-                <select name="how_heard"
-                  className="w-full bg-card border border-edge rounded-lg px-3 py-2 text-sm text-ink focus:border-edge-accent focus:outline-none">
-                  <option value="">Select one</option>
-                  {HOW_HEARD.map(h => <option key={h} value={h}>{h}</option>)}
-                </select>
+                <label className="block text-sm text-ink-muted mb-1.5">Notes <span className="text-ink-subtle text-xs">(optional)</span></label>
+                <textarea name="notes" rows={2} placeholder="Any special requests or details…"
+                  className="w-full bg-surface border border-edge rounded-lg px-3 py-2.5 text-sm text-ink placeholder:text-ink-subtle focus:border-edge-accent focus:outline-none resize-none" />
               </div>
             </div>
-          </section>
+          </div>
 
           {/* Error */}
           {error && (
@@ -250,16 +235,14 @@ export default function BookForm() {
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
                 </svg>
-                Sending...
+                Sending…
               </>
-            ) : (
-              'Send Booking Request →'
-            )}
+            ) : 'Request Appointment →'}
           </button>
 
-          <p className="text-xs text-ink-subtle text-center">
-            We&apos;ll confirm within a few hours. For urgent requests, call{' '}
-            <a href="tel:5413379893" className="text-accent">(541) 337-9893</a>.
+          <p className="text-xs text-ink-subtle text-center pb-4">
+            We confirm within a few hours. Urgent?{' '}
+            <a href="tel:5413379893" className="text-accent">(541) 337-9893</a>
           </p>
         </form>
       </div>

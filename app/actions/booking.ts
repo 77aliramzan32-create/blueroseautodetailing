@@ -102,6 +102,43 @@ export async function updateBookingStatus(id: string, status: BookingStatus) {
   return { success: true }
 }
 
+// ── Contact form lead (public) ───────────────────────────────────────────────
+
+export async function submitContactForm(formData: FormData) {
+  const supabase = createAnonClient()
+
+  const name    = (formData.get('name')    as string).trim()
+  const phone   = (formData.get('phone')   as string).trim() || 'See email'
+  const email   = (formData.get('email')   as string).trim() || null
+  const vehicle = (formData.get('vehicle') as string).trim() || null
+  const message = (formData.get('message') as string).trim() || null
+
+  const notes = [
+    vehicle ? `Vehicle: ${vehicle}` : null,
+    message ? `Message: ${message}` : null,
+  ].filter(Boolean).join('\n') || null
+
+  const today = new Date().toISOString().split('T')[0]
+
+  const { error } = await supabase.from('bookings').insert({
+    name,
+    phone,
+    email,
+    vehicle_type: 'other',
+    preferred_date: today,
+    preferred_time: 'TBD',
+    services:       ['General Inquiry'],
+    notes,
+    how_heard:      'Contact Form',
+    status:         'pending',
+  })
+
+  if (error) return { success: false, error: error.message }
+  return { success: true }
+}
+
+// ── Admin booking ops ───────────────────────────────────────────────────────
+
 export async function updateAdminNotes(id: string, admin_notes: string) {
   const authed = await isAdminAuthenticated()
   if (!authed) return { success: false, error: 'Unauthorized' }
