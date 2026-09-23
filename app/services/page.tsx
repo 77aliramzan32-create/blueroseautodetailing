@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { SERVICES } from '@/lib/data/services'
+import { LOCATIONS } from '@/lib/data/locations'
 import Breadcrumb from '@/components/layout/Breadcrumb'
 import CallToAction from '@/components/sections/CallToAction'
 
@@ -41,6 +42,25 @@ export default function ServicesPage() {
           ))}
         </div>
       </section>
+      {/* Service areas strip */}
+      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-10 border-t border-edge">
+        <p className="text-xs font-semibold uppercase tracking-widest text-chrome mb-4">Serving All of Lane County</p>
+        <div className="flex flex-wrap gap-2">
+          {LOCATIONS.map((loc) => (
+            <Link
+              key={loc.slug}
+              href={`/locations/${loc.slug}`}
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-edge text-sm text-ink-muted hover:border-edge-accent hover:text-ink transition-colors"
+            >
+              <svg className="w-3 h-3 text-accent shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+              </svg>
+              {loc.city}
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <CallToAction headline="Ready to Get Started?" subtext="Call or text us at (541) 337-9893 — we quote every job before work begins." />
     </main>
   )

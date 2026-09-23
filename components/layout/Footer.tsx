@@ -69,10 +69,10 @@ export default function Footer() {
       <div className="divider-chrome" aria-hidden="true" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-6">
 
           {/* ── Col 1: Brand ── */}
-          <div className="sm:col-span-2 lg:col-span-1">
+          <div className="sm:col-span-2 lg:col-span-2">
             <Link href="/" className="inline-block mb-5 group" aria-label="Blue Rose Auto Detailing — Home">
               <Image
                 src="/images/Blue-Rose-Auto.webp"
@@ -157,7 +157,63 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* ── Col 4: Contact / NAP ── */}
+          {/* ── Col 4: Company ── */}
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-chrome mb-4">
+              Company
+            </h3>
+            <ul className="space-y-2.5">
+              {[
+                { name: 'About Us',    href: '/about' },
+                { name: 'Gallery',     href: '/gallery' },
+                { name: 'Reviews',     href: '/reviews' },
+                { name: 'Blog',        href: '/blog' },
+                { name: 'FAQ',         href: '/faq' },
+                { name: 'Book Now',    href: '/book' },
+                { name: 'Contact',     href: '/contact' },
+              ].map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-sm text-ink-subtle hover:text-ink transition-colors">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 pt-5 border-t border-edge">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-chrome-dim mb-3">External</p>
+              <ul className="space-y-2">
+                <li>
+                  <a href="https://g.co/kgs/blueRoseAutoDetailing" target="_blank" rel="noopener noreferrer"
+                    className="text-sm text-ink-subtle hover:text-ink transition-colors flex items-center gap-1.5">
+                    Google Business
+                    <svg className="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.facebook.com/BlueRoseAuto" target="_blank" rel="noopener noreferrer"
+                    className="text-sm text-ink-subtle hover:text-ink transition-colors flex items-center gap-1.5">
+                    Facebook
+                    <svg className="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.yelp.com/biz/blue-rose-auto-detailing-services-springfield" target="_blank" rel="noopener noreferrer"
+                    className="text-sm text-ink-subtle hover:text-ink transition-colors flex items-center gap-1.5">
+                    Yelp Reviews
+                    <svg className="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* ── Col 5: Contact / NAP ── */}
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-chrome mb-4">
               Contact
@@ -236,9 +292,12 @@ export default function Footer() {
       <div className="border-t border-edge">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-xs text-ink-subtle">
-            &copy; 2024 Blue Rose Auto Detailing Services. All rights reserved.
+            &copy; {new Date().getFullYear()} Blue Rose Auto Detailing Services. All rights reserved.
           </p>
-          <p className="text-xs text-ink-subtle">Springfield, OR</p>
+          <div className="flex items-center gap-4">
+            <p className="text-xs text-ink-subtle">Springfield, OR 97478</p>
+            <Link href="/admin" className="text-xs text-ink-subtle/40 hover:text-ink-subtle transition-colors">Admin</Link>
+          </div>
         </div>
       </div>
     </footer>

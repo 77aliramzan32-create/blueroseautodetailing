@@ -508,6 +508,25 @@ export default async function Page({
                   <PhoneIcon />
                   Call to Book Your Detail
                 </a>
+
+                {/* Quick links */}
+                <div className="grid grid-cols-2 gap-2 mt-3">
+                  {[
+                    { name: 'Book Online', href: '/book' },
+                    { name: 'Gallery',     href: '/gallery' },
+                    { name: 'Reviews',     href: '/reviews' },
+                    { name: 'FAQ',         href: '/faq' },
+                  ].map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="flex items-center justify-center py-2 px-3 rounded-lg text-xs font-medium transition-colors"
+                      style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', color: '#A1A1AA' }}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -571,13 +590,34 @@ export default async function Page({
           </div>
         </section>
 
-        {/* ── Divider ──────────────────────────────────────────────────────── */}
-        <div
-          className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8"
-          aria-hidden="true"
+        {/* ── Gallery + Reviews band ───────────────────────────────────────── */}
+        <section
+          className="py-10"
+          style={{ background: 'rgba(200,36,63,0.04)', borderTop: '1px solid rgba(200,36,63,0.1)', borderBottom: '1px solid rgba(200,36,63,0.1)' }}
+          aria-label="Gallery and reviews"
         >
-          <div style={{ height: '1px', background: 'rgba(255,255,255,0.07)' }} />
-        </div>
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-center sm:text-left" style={{ color: '#A1A1AA' }}>
+              See real results from our Springfield shop — paint correction, ceramic coating, interior detail, RV detailing &amp; more.
+            </p>
+            <div className="flex gap-3 shrink-0">
+              <Link
+                href="/gallery"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold transition-colors"
+                style={{ background: 'rgba(200,36,63,0.1)', border: '1px solid rgba(200,36,63,0.25)', color: '#C8243F' }}
+              >
+                View Gallery →
+              </Link>
+              <Link
+                href="/reviews"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold transition-colors"
+                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#A1A1AA' }}
+              >
+                Read Reviews
+              </Link>
+            </div>
+          </div>
+        </section>
 
         {/* ── SECTION 4: Getting Here ────────────────────────────────────── */}
         <section

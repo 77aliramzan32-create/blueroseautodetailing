@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { LOCATIONS } from '@/lib/data/locations'
+import { SERVICES } from '@/lib/data/services'
 import Breadcrumb from '@/components/layout/Breadcrumb'
 import CallToAction from '@/components/sections/CallToAction'
 
@@ -55,6 +56,27 @@ export default function LocationsPage() {
           ))}
         </div>
       </section>
+      {/* Services strip */}
+      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-10 border-t border-edge">
+        <p className="text-xs font-semibold uppercase tracking-widest text-chrome mb-4">Services Available at Every Location</p>
+        <div className="flex flex-wrap gap-2">
+          {SERVICES.map((svc) => (
+            <Link
+              key={svc.slug}
+              href={`/services/${svc.slug}`}
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-edge text-sm text-ink-muted hover:border-edge-accent hover:text-ink transition-colors"
+            >
+              {svc.shortName}
+            </Link>
+          ))}
+        </div>
+        <div className="flex gap-4 mt-6">
+          <Link href="/gallery" className="text-sm text-accent hover:underline underline-offset-2 font-medium">View Our Work →</Link>
+          <Link href="/reviews" className="text-sm text-accent hover:underline underline-offset-2 font-medium">Read Reviews →</Link>
+          <Link href="/book"    className="text-sm text-accent hover:underline underline-offset-2 font-medium">Book Now →</Link>
+        </div>
+      </section>
+
       <CallToAction headline="Auto Detailing Near You" subtext="Bring your vehicle to our Springfield shop — serving all of Lane County and beyond." />
     </main>
   )

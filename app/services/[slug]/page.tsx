@@ -3,11 +3,23 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { SERVICES, getService } from '@/lib/data/services'
+import { LOCATIONS } from '@/lib/data/locations'
 import { getFAQsByIds } from '@/lib/data/faqs'
 import { serviceSchema, breadcrumbSchema, faqPageSchema } from '@/lib/schema/jsonld'
 import Breadcrumb from '@/components/layout/Breadcrumb'
 import FAQAccordion from '@/components/sections/FAQAccordion'
 import CallToAction from '@/components/sections/CallToAction'
+
+const RELATED: Record<string, string[]> = {
+  'auto-detailing':        ['paint-correction', 'ceramic-coating', 'rv-detailing'],
+  'paint-correction':      ['ceramic-coating', 'paint-protection-film', 'auto-detailing'],
+  'ceramic-coating':       ['paint-correction', 'paint-protection-film', 'auto-detailing'],
+  'paint-protection-film': ['ceramic-coating', 'paint-correction', 'window-tinting'],
+  'window-tinting':        ['paint-protection-film', 'vinyl-wraps', 'auto-detailing'],
+  'vinyl-wraps':           ['window-tinting', 'paint-protection-film', 'ceramic-coating'],
+  'rv-detailing':          ['auto-detailing', 'ceramic-coating', 'boat-detailing'],
+  'boat-detailing':        ['rv-detailing', 'auto-detailing', 'ceramic-coating'],
+}
 
 // ── Static params ────────────────────────────────────────────────────────────
 
@@ -436,7 +448,86 @@ export default async function Page({
       )}
 
       {/* ══════════════════════════════════════════════════════════════════
-          Section 5 — Call to Action
+          Section 5 — Related Services
+      ══════════════════════════════════════════════════════════════════ */}
+      <section className="bg-surface py-16 md:py-20" aria-labelledby="related-services-heading">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="font-body text-xs font-semibold tracking-widest uppercase text-accent mb-3">
+            Also Available
+          </p>
+          <h2 id="related-services-heading" className="font-display text-2xl md:text-3xl font-extrabold text-ink mb-8">
+            Related Services
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {(RELATED[slug] ?? []).map((relSlug) => {
+              const svc = SERVICES.find((s) => s.slug === relSlug)
+              if (!svc) return null
+              return (
+                <Link
+                  key={relSlug}
+                  href={`/services/${relSlug}`}
+                  className="group rounded-xl p-5 border border-edge hover:border-edge-accent transition-all duration-200"
+                  style={{ background: '#131315' }}
+                >
+                  <h3 className="font-display font-bold text-base text-ink group-hover:text-accent transition-colors mb-1">
+                    {svc.name}
+                  </h3>
+                  <p className="text-xs text-ink-subtle leading-relaxed mb-3 line-clamp-2">{svc.tagline}</p>
+                  <span className="text-xs text-accent font-semibold">Learn more →</span>
+                </Link>
+              )
+            })}
+          </div>
+          <div className="mt-6">
+            <Link href="/services" className="text-sm text-accent hover:underline underline-offset-2 font-medium">
+              View all 8 services →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          Section 6 — Service Areas
+      ══════════════════════════════════════════════════════════════════ */}
+      <section
+        className="py-16 md:py-20 border-t border-edge"
+        style={{ background: '#0D0D0F' }}
+        aria-labelledby="service-areas-heading"
+      >
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="font-body text-xs font-semibold tracking-widest uppercase text-accent mb-3">
+            Where We Serve
+          </p>
+          <h2 id="service-areas-heading" className="font-display text-2xl md:text-3xl font-extrabold text-ink mb-3">
+            {service.name} in Springfield, Eugene &amp; Lane County, OR
+          </h2>
+          <p className="text-ink-muted text-sm mb-8 max-w-2xl">
+            Our shop is located at 3436 Olympic Street in Springfield, OR — accessible from communities across
+            Lane County. Drop off your vehicle or call for details.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {LOCATIONS.map((loc) => (
+              <Link
+                key={loc.slug}
+                href={`/locations/${loc.slug}`}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-edge text-sm text-ink-muted hover:border-edge-accent hover:text-ink transition-colors"
+              >
+                <svg className="w-3 h-3 text-accent shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                </svg>
+                {loc.city}, OR
+              </Link>
+            ))}
+          </div>
+          <p className="mt-8 text-xs text-ink-subtle">
+            Blue Rose Auto Detailing Services &mdash; Suite 100, 3436 Olympic Street, Springfield, OR 97478 &mdash;{' '}
+            <a href="tel:5413379893" className="text-accent hover:underline">(541) 337-9893</a>
+          </p>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          Section 7 — Call to Action
       ══════════════════════════════════════════════════════════════════ */}
       <CallToAction
         headline="Ready to Get Your Vehicle Detailed?"
