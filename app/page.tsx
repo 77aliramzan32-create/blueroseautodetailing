@@ -169,6 +169,51 @@ const WHY_PILLARS = [
   },
 ]
 
+// ── VideoObject schema ────────────────────────────────────────────────────────
+
+const videoSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  '@id': 'https://www.blueroseautodetailing.com/#video-intro',
+  name: 'Blue Rose Auto Detailing — Professional Auto Detailing in Springfield & Eugene, OR',
+  description:
+    "Watch Blue Rose Auto Detailing in action — Springfield, Oregon's premier owner-operated auto detailing shop. We specialize in paint correction, ceramic coating, paint protection film (PPF), window tinting, vinyl wraps, interior deep cleaning, RV detailing, and boat detailing. Serving Eugene, Springfield, Coburg, Veneta, Creswell, Cottage Grove, Junction City, Santa Clara, Harrisburg, and all of Lane County since 1994. Call (541) 337-9893.",
+  thumbnailUrl: 'https://img.youtube.com/vi/XfK-FSiFS5U/maxresdefault.jpg',
+  uploadDate: '2025-01-01',
+  contentUrl: 'https://www.youtube.com/watch?v=XfK-FSiFS5U',
+  embedUrl: 'https://www.youtube.com/embed/XfK-FSiFS5U',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Blue Rose Auto Detailing Services',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://www.blueroseautodetailing.com/images/Blue-Rose-Auto.webp',
+      width: 600,
+      height: 700,
+    },
+    url: 'https://www.blueroseautodetailing.com',
+    sameAs: [
+      'https://www.youtube.com/@BLUEROSEAUTO',
+      'https://www.facebook.com/BlueRoseAuto',
+      'https://www.instagram.com/blueroseauto',
+    ],
+  },
+  keywords:
+    'auto detailing Springfield OR, ceramic coating Eugene OR, paint correction Oregon, car detailing Springfield, PPF Springfield OR, window tinting Eugene, vinyl wrap Springfield, RV detailing Lane County',
+  inLanguage: 'en-US',
+  isFamilyFriendly: true,
+}
+
+// ── YouTube icon ──────────────────────────────────────────────────────────────
+
+function YouTubeIcon() {
+  return (
+    <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+    </svg>
+  )
+}
+
 // ── Home Page ────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
@@ -266,10 +311,102 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. Testimonials */}
+      {/* 5. See Us in Action — YouTube Video */}
+      <section
+        aria-label="Blue Rose Auto Detailing Springfield OR — Watch Our Work"
+        className="w-full bg-surface py-16 md:py-24"
+      >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+        />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+
+            {/* Video — full width on mobile (appears first), right column on desktop */}
+            <div className="order-1 lg:order-2">
+              <div
+                className="relative w-full rounded-2xl overflow-hidden border border-edge shadow-[0_0_40px_rgba(200,36,63,0.08)]"
+                style={{ aspectRatio: '16/9' }}
+              >
+                <iframe
+                  src="https://www.youtube.com/embed/XfK-FSiFS5U?si=93jfhvqF3XYBG-t2"
+                  title="Blue Rose Auto Detailing Springfield OR — Professional Auto Detailing Services in Eugene &amp; Lane County"
+                  className="absolute inset-0 w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  loading="lazy"
+                />
+              </div>
+              <p className="mt-3 text-xs text-ink-subtle text-center">
+                Blue Rose Auto Detailing · Suite 100, 3436 Olympic St, Springfield, OR &middot;{' '}
+                <a href="tel:5413379893" className="text-accent hover:underline">(541) 337-9893</a>
+              </p>
+            </div>
+
+            {/* Text — below video on mobile, left column on desktop */}
+            <div className="order-2 lg:order-1">
+              <p className="font-body text-sm font-semibold text-accent tracking-widest uppercase mb-3">
+                Watch Our Work
+              </p>
+              <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl text-ink mb-4 leading-tight">
+                See What We Do for Your Vehicle
+              </h2>
+              <p className="font-body text-base text-ink-muted mb-6 leading-relaxed">
+                Watch how we transform vehicles at our Springfield, OR shop. Every job is handled by Tristan — our owner and lead detailer — who personally inspects every vehicle before it leaves the bay.
+              </p>
+
+              {/* AEO/GEO direct-answer block — answers "What does Blue Rose do?" for AI overviews */}
+              <div
+                className="mb-8 rounded-xl p-4 md:p-5 text-sm text-ink-muted leading-relaxed aeo-summary"
+                style={{
+                  background: 'rgba(19,19,21,0.85)',
+                  border: '1px solid rgba(255,255,255,0.07)',
+                  borderLeft: '3px solid #C8243F',
+                }}
+              >
+                <strong className="text-ink block mb-1 text-sm">Blue Rose Auto Detailing Services</strong>
+                Springfield &amp; Eugene, OR&apos;s premier auto detailing shop — owner-operated since 1994.
+                Services include{' '}
+                <Link href="/services/auto-detailing" className="text-accent hover:underline">auto detailing</Link>,{' '}
+                <Link href="/services/paint-correction" className="text-accent hover:underline">paint correction</Link>,{' '}
+                <Link href="/services/ceramic-coating" className="text-accent hover:underline">ceramic coating</Link>,{' '}
+                <Link href="/services/paint-protection-film" className="text-accent hover:underline">PPF</Link>,{' '}
+                <Link href="/services/window-tinting" className="text-accent hover:underline">window tinting</Link>,{' '}
+                <Link href="/services/rv-detailing" className="text-accent hover:underline">RV detailing</Link>, and{' '}
+                <Link href="/services/boat-detailing" className="text-accent hover:underline">boat detailing</Link>{' '}
+                — serving all of Lane County.
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  href="/book"
+                  className="inline-flex items-center justify-center gap-2 font-body font-bold text-sm px-6 py-3.5 rounded-xl bg-accent text-white transition-all duration-200 hover:bg-[#a81d34] hover:shadow-[0_0_20px_4px_rgba(200,36,63,0.4)] w-full sm:w-auto"
+                >
+                  Book a Detail
+                </Link>
+                <a
+                  href="https://www.youtube.com/@BLUEROSEAUTO"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 font-body font-bold text-sm px-6 py-3.5 rounded-xl border border-edge text-ink-muted hover:border-edge-bright hover:text-ink transition-colors w-full sm:w-auto"
+                  aria-label="Subscribe to Blue Rose Auto Detailing on YouTube"
+                >
+                  <YouTubeIcon />
+                  Subscribe on YouTube
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Testimonials */}
       <TestimonialSection />
 
-      {/* 6. Our Work — Gallery Preview */}
+      {/* 7. Our Work — Gallery Preview */}
       <section aria-label="Our work — project photo gallery" className="w-full bg-surface py-14 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-8 gap-4">
@@ -329,7 +466,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. Service Area */}
+      {/* 8. Service Area */}
       <section
         aria-label="Service area — cities we serve"
         className="relative w-full bg-card border-y border-edge"
@@ -432,7 +569,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. Bottom CTA */}
+      {/* 9. Bottom CTA */}
       <CallToAction
         headline="Ready for a Professional Detail?"
         subtext="Call us or request a free quote online. Every job is priced transparently before work begins — no surprise charges, ever."
