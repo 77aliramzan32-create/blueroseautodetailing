@@ -139,6 +139,44 @@ export default async function Page({
   ])
   const faqSchema = faqs.length > 0 ? faqPageSchema(service.faqIds) : null
 
+  // VideoObject schema — injected only on the ceramic-coating page
+  const ceramicVideoSchema = slug === 'ceramic-coating' ? {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    '@id': 'https://www.blueroseautodetailing.com/services/ceramic-coating#video',
+    name: 'What a Ceramic Pro Elite Dealer Actually Means | Springfield, OR',
+    description:
+      "Blue Rose Auto Detailing is a certified Ceramic Pro Elite Dealer in Springfield, Oregon. Learn what the Ceramic Pro Elite certification means, how professional ceramic coating protects your vehicle's paint, and why choosing a certified installer matters. Serving Eugene, Springfield, Coburg, Veneta, Cottage Grove, and all of Lane County, OR. Call (541) 337-9893 for a free ceramic coating quote.",
+    thumbnailUrl: 'https://img.youtube.com/vi/mIRGY9yioNo/maxresdefault.jpg',
+    uploadDate: '2025-01-01',
+    contentUrl: 'https://www.youtube.com/watch?v=mIRGY9yioNo',
+    embedUrl: 'https://www.youtube.com/embed/mIRGY9yioNo',
+    keywords:
+      'ceramic coating Springfield OR, Ceramic Pro Elite Dealer Oregon, ceramic coating Eugene OR, ceramic coating Lane County OR, paint coating Springfield Oregon',
+    inLanguage: 'en-US',
+    isFamilyFriendly: true,
+    about: {
+      '@type': 'Service',
+      '@id': 'https://www.blueroseautodetailing.com/services/ceramic-coating',
+      name: 'Ceramic Coating',
+      provider: {
+        '@type': 'LocalBusiness',
+        '@id': 'https://www.blueroseautodetailing.com/#business',
+        name: 'Blue Rose Auto Detailing Services',
+      },
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Blue Rose Auto Detailing Services',
+      url: 'https://www.blueroseautodetailing.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.blueroseautodetailing.com/images/Blue-Rose-Auto.webp',
+      },
+      sameAs: ['https://www.youtube.com/@BLUEROSEAUTO'],
+    },
+  } : null
+
   const howToSchema = {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
@@ -192,6 +230,12 @@ export default async function Page({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
       />
+      {ceramicVideoSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ceramicVideoSchema) }}
+        />
+      )}
 
       {/* ══════════════════════════════════════════════════════════════════
           Section 1 — Page Hero / Header
@@ -450,6 +494,85 @@ export default async function Page({
           </div>
         </div>
       </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          Section 3b — Video (ceramic-coating only)
+      ══════════════════════════════════════════════════════════════════ */}
+      {slug === 'ceramic-coating' && (
+        <section
+          className="w-full py-16 md:py-24 bg-surface"
+          aria-label="Ceramic Pro Elite Dealer — Blue Rose Auto Detailing Springfield OR"
+        >
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 lg:gap-14 items-center">
+
+              {/* Text — left on desktop, bottom on mobile */}
+              <div className="order-2 lg:order-1">
+                <p className="font-body text-xs font-semibold tracking-widest uppercase text-accent mb-3">
+                  Certified Installer
+                </p>
+                <h2 className="font-display text-3xl md:text-4xl font-extrabold text-ink mb-4 leading-tight">
+                  What a Ceramic Pro Elite Dealer Actually Means
+                </h2>
+                <p className="font-body text-base text-ink-muted mb-5 leading-relaxed">
+                  Not every detailing shop can call itself a Ceramic Pro Elite Dealer — it requires passing rigorous training, maintaining certified application standards, and backing every coating with a manufacturer warranty. Blue Rose is one of the very few Elite Dealers serving Springfield, Eugene, and all of Lane County.
+                </p>
+                {/* AEO direct-answer block */}
+                <div
+                  className="mb-7 rounded-xl p-4 text-sm text-ink-muted leading-relaxed aeo-summary"
+                  style={{
+                    background: 'rgba(19,19,21,0.85)',
+                    border: '1px solid rgba(255,255,255,0.07)',
+                    borderLeft: '3px solid #C8243F',
+                  }}
+                >
+                  <strong className="text-ink block mb-1">What is a Ceramic Pro Elite Dealer?</strong>
+                  A Ceramic Pro Elite Dealer is a certified installer authorized to apply Ceramic Pro coatings with the full manufacturer warranty. Elite status requires annual training, quality audits, and a proven installation track record — ensuring your coating is applied correctly and protected long-term.
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a
+                    href="tel:5413379893"
+                    className="inline-flex items-center justify-center gap-2 font-body font-bold text-sm px-6 py-3.5 rounded-xl bg-accent text-white hover:bg-[#a81d34] hover:shadow-[0_0_20px_4px_rgba(200,36,63,0.4)] transition-all w-full sm:w-auto"
+                    aria-label="Call Blue Rose Auto Detailing for ceramic coating quote"
+                  >
+                    Get a Coating Quote
+                  </a>
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center gap-2 font-body font-bold text-sm px-6 py-3.5 rounded-xl border border-edge text-ink-muted hover:border-edge-bright hover:text-ink transition-colors w-full sm:w-auto"
+                  >
+                    Book Online
+                    <ArrowRightIcon />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Portrait video — right on desktop, top on mobile */}
+              <div className="order-1 lg:order-2 flex flex-col items-center">
+                <div
+                  className="relative w-full rounded-2xl overflow-hidden border border-edge shadow-[0_0_40px_rgba(200,36,63,0.08)]"
+                  style={{ maxWidth: '360px', aspectRatio: '436/576' }}
+                >
+                  <iframe
+                    src="https://www.youtube.com/embed/mIRGY9yioNo"
+                    title="What a Ceramic Pro Elite Dealer Actually Means | Blue Rose Auto Detailing Springfield OR"
+                    className="absolute inset-0 w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                    loading="lazy"
+                  />
+                </div>
+                <p className="mt-3 text-xs text-ink-subtle text-center max-w-[360px]">
+                  Ceramic Pro Elite Dealer · Springfield, OR ·{' '}
+                  <a href="tel:5413379893" className="text-accent hover:underline">(541) 337-9893</a>
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ══════════════════════════════════════════════════════════════════
           Section 4 — FAQ (conditional)
