@@ -77,6 +77,28 @@ function CheckIcon() {
   )
 }
 
+function XIcon() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className="shrink-0 mt-0.5"
+    >
+      <circle cx="10" cy="10" r="10" fill="rgba(255,255,255,0.06)" />
+      <path
+        d="M7 7l6 6M13 7l-6 6"
+        stroke="rgba(255,255,255,0.35)"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  )
+}
+
 function PhoneIcon() {
   return (
     <svg
@@ -417,6 +439,86 @@ export default async function Page({
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
+          Section 2.5 — Is This Right For Your Car? (conditional)
+      ══════════════════════════════════════════════════════════════════ */}
+      {(service.rightFor || service.notRightFor) && (
+        <section
+          className="py-16 md:py-24"
+          style={{ background: '#0D0D0F' }}
+          aria-labelledby="right-for-heading"
+        >
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-10 md:mb-14">
+              <p className="font-body text-xs font-semibold tracking-widest uppercase text-accent mb-3">
+                Before You Book
+              </p>
+              <h2
+                id="right-for-heading"
+                className="font-display text-3xl md:text-4xl font-extrabold text-ink"
+              >
+                Is {service.shortName} Right for Your Car?
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+              {service.rightFor && service.rightFor.length > 0 && (
+                <div
+                  className="rounded-2xl p-6 md:p-8"
+                  style={{ background: '#131315', border: '1px solid rgba(255,255,255,0.07)' }}
+                >
+                  <h3 className="font-display text-xs font-bold text-ink mb-5 tracking-widest uppercase">
+                    Good fit if
+                  </h3>
+                  <ul className="space-y-4" aria-label={`When ${service.shortName} is a good fit`}>
+                    {service.rightFor.map((item, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <CheckIcon />
+                        <span className="font-body text-sm text-ink-muted leading-snug">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {service.notRightFor && service.notRightFor.length > 0 && (
+                <div
+                  className="rounded-2xl p-6 md:p-8"
+                  style={{ background: '#131315', border: '1px solid rgba(255,255,255,0.07)' }}
+                >
+                  <h3 className="font-display text-xs font-bold text-ink mb-5 tracking-widest uppercase">
+                    Not the right service if
+                  </h3>
+                  <ul className="space-y-4" aria-label={`When ${service.shortName} is not the right choice`}>
+                    {service.notRightFor.map((item, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <XIcon />
+                        <span className="font-body text-sm text-ink-muted leading-snug">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+            {service.notRightAlternative && (
+              <div
+                className="rounded-xl p-5 md:p-6 max-w-3xl"
+                style={{
+                  background: 'rgba(19,19,21,0.85)',
+                  border: '1px solid rgba(255,255,255,0.07)',
+                  borderLeft: '3px solid #C8243F',
+                }}
+              >
+                <p className="font-body text-xs font-semibold tracking-widest uppercase text-accent mb-2">
+                  What to do instead
+                </p>
+                <p className="font-body text-sm text-ink-muted leading-relaxed">
+                  {service.notRightAlternative}
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* ══════════════════════════════════════════════════════════════════
           Section 3 — Our Process
       ══════════════════════════════════════════════════════════════════ */}
       <section
@@ -496,6 +598,50 @@ export default async function Page({
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
+          Section 3.5 — Pricing Note (conditional)
+      ══════════════════════════════════════════════════════════════════ */}
+      {service.pricingNote && (
+        <section
+          className="bg-surface py-16 md:py-20"
+          aria-labelledby="pricing-heading"
+        >
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="font-body text-xs font-semibold tracking-widest uppercase text-accent mb-3">
+              Pricing
+            </p>
+            <h2
+              id="pricing-heading"
+              className="font-display text-2xl md:text-3xl font-extrabold text-ink mb-6"
+            >
+              What Affects the Cost
+            </h2>
+            {service.pricingNote.split('\n').filter(Boolean).map((para, i) => (
+              <p key={i} className="font-body text-base text-ink-muted leading-relaxed mb-4 last:mb-0">
+                {para}
+              </p>
+            ))}
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              <a
+                href="tel:5413379893"
+                className="inline-flex items-center justify-center gap-2 font-body font-bold text-sm px-6 py-3.5 rounded-xl bg-accent text-white hover:bg-[#a81d34] hover:shadow-[0_0_20px_4px_rgba(200,36,63,0.4)] transition-all w-full sm:w-auto"
+                aria-label={`Call for a free ${service.shortName} quote`}
+              >
+                <PhoneIcon />
+                Call for a Free Quote
+              </a>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 font-body font-bold text-sm px-6 py-3.5 rounded-xl border border-edge text-ink-muted hover:border-edge-bright hover:text-ink transition-colors w-full sm:w-auto"
+              >
+                Book Online
+                <ArrowRightIcon />
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ══════════════════════════════════════════════════════════════════
           Section 3b — Video (ceramic-coating only)
       ══════════════════════════════════════════════════════════════════ */}
       {slug === 'ceramic-coating' && (
@@ -570,6 +716,34 @@ export default async function Page({
               </div>
 
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* ══════════════════════════════════════════════════════════════════
+          Section 4.5 — Local Angle (conditional)
+      ══════════════════════════════════════════════════════════════════ */}
+      {service.localAngle && (
+        <section
+          className="py-16 md:py-20 border-t border-edge"
+          style={{ background: '#0D0D0F' }}
+          aria-labelledby="local-angle-heading"
+        >
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="font-body text-xs font-semibold tracking-widest uppercase text-accent mb-3">
+              In Lane County
+            </p>
+            <h2
+              id="local-angle-heading"
+              className="font-display text-2xl md:text-3xl font-extrabold text-ink mb-6"
+            >
+              What We See on Springfield &amp; Eugene Cars
+            </h2>
+            {service.localAngle.split('\n').filter(Boolean).map((para, i) => (
+              <p key={i} className="font-body text-base text-ink-muted leading-relaxed mb-4 last:mb-0">
+                {para}
+              </p>
+            ))}
           </div>
         </section>
       )}
